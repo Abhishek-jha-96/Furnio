@@ -1,39 +1,48 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
 } from 'typeorm';
 
 @ObjectType()
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  @Field(() => Int)
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => String)
+  uid: string;
 
   @Column()
   @Field()
-  name: string;
+  first_name: string;
+
+  @Column()
+  @Field({ nullable: true })
+  last_name: string;
 
   @Column()
   @Field()
   email: string;
 
-  @Column({ nullable: true })
+  @Column()
   @Field({ nullable: true })
-  age?: number;
+  image: string;
 
   @Column({ default: true })
   @Field()
   isActive: boolean;
 
+  @Column({ default: false })
+  @Field()
+  isVerified: boolean;
+
   @CreateDateColumn()
   @Field()
   createdAt: Date;
 
-  @Column({ length: 255 })
-  @Field()
-  password: string;
+  @DeleteDateColumn()
+  @Field({ nullable: true })
+  deletedAt: Date;
 }
