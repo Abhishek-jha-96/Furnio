@@ -1,17 +1,17 @@
-import CategoryCard from "./CategoryCard";
+import CategoryCard from './CategoryCard';
 
 const category_data = [
   {
-    imagePath: "/furniro_assets/living1.png",
-    title: "Living",
+    imagePath: '/furniro_assets/living1.png',
+    title: 'Living',
   },
   {
-    imagePath: "/furniro_assets/bedroom1.png",
-    title: "Bedroom",
+    imagePath: '/furniro_assets/bedroom1.png',
+    title: 'Bedroom',
   },
   {
-    imagePath: "/furniro_assets/dining1.png",
-    title: "Dining",
+    imagePath: '/furniro_assets/dining1.png',
+    title: 'Dining',
   },
 ];
 
@@ -25,7 +25,7 @@ export default function Category() {
       <div className="flex flex-wrap gap-2 gap-x-8 py-16 justify-center">
         {category_data.map((category, index) => (
           <CategoryCard
-          key={index}
+            key={index}
             imagePath={category.imagePath}
             title={category.title}
           />

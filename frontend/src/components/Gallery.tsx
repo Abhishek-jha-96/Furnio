@@ -1,19 +1,19 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function Gallery() {
   const imageUrls = [
-    "/furniro_assets/share1.png",
-    "/furniro_assets/share2.png",
-    "/furniro_assets/share3.png",
-    "/furniro_assets/share4.png",
-    "/furniro_assets/share5.png",
-    "/furniro_assets/share6.png",
-    "/furniro_assets/share7.png",
-    "/furniro_assets/share8.png",
-    "/furniro_assets/share5.png",
-    "/furniro_assets/share6.png",
-    "/furniro_assets/share7.png",
-    "/furniro_assets/share8.png",
+    '/furniro_assets/share1.png',
+    '/furniro_assets/share2.png',
+    '/furniro_assets/share3.png',
+    '/furniro_assets/share4.png',
+    '/furniro_assets/share5.png',
+    '/furniro_assets/share6.png',
+    '/furniro_assets/share7.png',
+    '/furniro_assets/share8.png',
+    '/furniro_assets/share5.png',
+    '/furniro_assets/share6.png',
+    '/furniro_assets/share7.png',
+    '/furniro_assets/share8.png',
   ];
 
   return (

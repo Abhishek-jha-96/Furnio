@@ -1,10 +1,10 @@
-import Category from "@/components/Category";
-import Footer from "@/components/Footer";
-import Gallery from "@/components/Gallery";
-import HeroSec from "@/components/HeroSec";
-import NavBar from "@/components/NavBar";
-import Products from "@/components/Products";
-import ShowCase from "@/components/ShowCase";
+import Category from '@/components/Category';
+import Footer from '@/components/Footer';
+import Gallery from '@/components/Gallery';
+import HeroSec from '@/components/HeroSec';
+import NavBar from '@/components/NavBar';
+import Products from '@/components/Products';
+import ShowCase from '@/components/ShowCase';
 
 export default function Home() {
   return (

@@ -8,13 +8,25 @@ import {
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @ObjectType()
-@Entity()
-export class Product {
-  @PrimaryGeneratedColumn('uuid')
+export abstract class BaseEntityWithTimestamps {
+  @CreateDateColumn()
   @Field()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  @Field()
+  updatedAt: Date;
+}
+
+@ObjectType()
+@Entity()
+export class Product extends BaseEntityWithTimestamps {
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => String)
   id: string;
 
   @Column()
@@ -33,11 +45,9 @@ export class Product {
   @Field()
   category: string; // fk
 
-  @OneToOne((type) => ImageLinks, (imageLinks) => imageLinks.id, {
-    cascade: true,
-  })
-  @Field()
-  imageLinks: ImageLinks[];
+  @OneToOne(() => ImageLinks, { cascade: true, nullable: true })
+  @Field(() => ImageLinks, { nullable: true })
+  imageLinks: ImageLinks;
 
   @Column()
   @Field()
@@ -47,16 +57,12 @@ export class Product {
   @Field()
   color: string;
 
-  @OneToMany((type) => Tags, (tags) => tags.id, { cascade: true })
-  @Field()
+  @OneToMany(() => Tags, (tags) => tags.product, { cascade: true })
+  @Field(() => [Tags])
   tags: Tags[];
 
-  @CreateDateColumn()
-  @Field()
-  createdAt: Date;
-
   @DeleteDateColumn()
-  @Field()
+  @Field({ nullable: true })
   deletedAt: Date;
 
   @Column()
@@ -94,7 +100,7 @@ export class Product {
 
 @ObjectType()
 @Entity()
-export class ImageLinks {
+export class ImageLinks extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
@@ -110,7 +116,7 @@ export class ImageLinks {
 
 @ObjectType()
 @Entity()
-export class Tags {
+export class Tags extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
@@ -118,11 +124,15 @@ export class Tags {
   @Column()
   @Field()
   name: string;
+
+  @ManyToOne(() => Product, (product) => product.tags)
+  @Field(() => Product)
+  product: Product;
 }
 
 @ObjectType()
 @Entity()
-export class GeneralDetail {
+export class GeneralDetail extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
@@ -158,7 +168,7 @@ export class GeneralDetail {
 
 @ObjectType()
 @Entity()
-export class UpholesteryMaterial {
+export class UpholesteryMaterial extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
@@ -170,7 +180,7 @@ export class UpholesteryMaterial {
 
 @ObjectType()
 @Entity()
-export class ProductDetails {
+export class ProductDetails extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
@@ -202,7 +212,7 @@ export class ProductDetails {
 
 @ObjectType()
 @Entity()
-export class FillingMaterial {
+export class FillingMaterial extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
@@ -214,9 +224,9 @@ export class FillingMaterial {
 
 @ObjectType()
 @Entity()
-export class Dimension {
+export class Dimension extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
-  @Field()
+  @Field(() => String)
   id: string;
 
   @Column()

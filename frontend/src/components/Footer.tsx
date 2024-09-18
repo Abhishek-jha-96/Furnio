@@ -1,7 +1,7 @@
-import { InstagramLogoIcon } from "@radix-ui/react-icons";
-import { Facebook } from "lucide-react";
-import FacebookIcon from "./facebookIcon";
-import InstagramIcon from "./InstagramIcon";
+import { InstagramLogoIcon } from '@radix-ui/react-icons';
+import { Facebook } from 'lucide-react';
+import FacebookIcon from './facebookIcon';
+import InstagramIcon from './InstagramIcon';
 
 export default function Footer() {
   return (

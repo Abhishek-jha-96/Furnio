@@ -1,27 +1,26 @@
-import Image from "next/image";
-import main_logo from "../../public/furniro_assets/Meubel House_Logos-05.png";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Heart, Search, ShoppingCartIcon } from "lucide-react";
+import Image from 'next/image';
+import main_logo from '../../public/furniro_assets/Meubel House_Logos-05.png';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Heart, Search, ShoppingCartIcon } from 'lucide-react';
 
 const MenuProps = [
   {
-    name: "Home",
-    href: "/",
+    name: 'Home',
+    href: '/',
   },
   {
-    name: "Shop",
-    href: "/shop",
+    name: 'Shop',
+    href: '/shop',
   },
   {
-    name: "About",
-    href: "/about",
+    name: 'About',
+    href: '/about',
   },
   {
-    name: "Contact",
-    href: "/contact",
+    name: 'Contact',
+    href: '/contact',
   },
 ];
-
 
 export default function NavBar() {
   return (
