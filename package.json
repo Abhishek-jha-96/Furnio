@@ -8,9 +8,25 @@
     "backend"
   ],
   "scripts": {
-    "lint": "npm run lint --workspaces",
-    "format": "npm run format --workspaces"
+    "lint": "eslint \"{frontend, backend}/**/*.ts\" --fix",
+    "format": "prettier  \"{backend}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
+    "format:check": "npm run format --check ",
+    "format:write": "npm run format --write --workspaces",
+    "validate": "npm run format:write && npm run lint",
+    "prepare": "husky"
   },
   "author": "Abhishek",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@types/graceful-fs": "^4.1.9",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.36.1",
+    "globals": "^15.9.0",
+    "husky": "^9.1.6",
+    "typescript-eslint": "^8.6.0"
+  },
+  "dependencies": {
+    "prettier": "^3.3.3"
+  }
 }
