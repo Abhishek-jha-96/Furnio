@@ -73,21 +73,23 @@ export class Product extends BaseEntityWithTimestamps {
   @Field()
   addInfo: string;
 
-  @ManyToOne((type) => GeneralDetail, (generalDetail) => generalDetail.id, {
+  @ManyToOne(() => GeneralDetail, (generalDetail) => generalDetail.product, {
     cascade: true,
   })
-  @Field()
+  @Field(() => [GeneralDetail])
   generalDetail: GeneralDetail[];
 
-  @ManyToOne((type) => ProductDetails, (productDetails) => productDetails.id, {
+  @ManyToOne(() => ProductDetails, (productDetails) => productDetails.product, {
     cascade: true,
   })
-  @Field()
+  @Field(() => [ProductDetails])
   productDetails: ProductDetails[];
 
-  @Column()
-  @Field()
-  dimension: string; // fk
+  @ManyToOne(() => Dimension, (dimension) => dimension.product, {
+    cascade: true,
+  })
+  @Field(() => [Dimension])
+  dimension: Dimension[];
 
   @Column()
   @Field()
@@ -154,8 +156,8 @@ export class GeneralDetail extends BaseEntityWithTimestamps {
   configuration: string;
 
   @ManyToOne(
-    (type) => UpholesteryMaterial,
-    (upholsteryMaterial) => upholsteryMaterial.id,
+    () => UpholesteryMaterial,
+    (upholsteryMaterial) => upholsteryMaterial.generalDetail,
     { cascade: true },
   )
   @Field()
@@ -164,6 +166,10 @@ export class GeneralDetail extends BaseEntityWithTimestamps {
   @Column()
   @Field()
   upholsteryColor: string;
+
+  @OneToMany(() => Product, (product) => product.generalDetail)
+  @Field(() => [Product])
+  product: Product;
 }
 
 @ObjectType()
@@ -176,6 +182,13 @@ export class UpholesteryMaterial extends BaseEntityWithTimestamps {
   @Column()
   @Field()
   materialName: string;
+
+  @OneToMany(
+    () => GeneralDetail,
+    (generalDetail) => generalDetail.upholsteryMaterial,
+  )
+  @Field(() => [GeneralDetail])
+  generalDetail: GeneralDetail[];
 }
 
 @ObjectType()
@@ -186,11 +199,13 @@ export class ProductDetails extends BaseEntityWithTimestamps {
   id: string;
 
   @ManyToOne(
-    (type) => FillingMaterial,
-    (fillingMaterial) => fillingMaterial.id,
-    { cascade: true },
+    () => FillingMaterial,
+    (fillingMaterial) => fillingMaterial.productDetails,
+    {
+      cascade: true,
+    },
   )
-  @Field()
+  @Field(() => [FillingMaterial])
   fillingMaterial: FillingMaterial[];
 
   @Column()
@@ -208,6 +223,10 @@ export class ProductDetails extends BaseEntityWithTimestamps {
   @Column()
   @Field()
   OriginOfManufacture: string;
+
+  @OneToMany(() => Product, (product) => product.productDetails)
+  @Field(() => [Product])
+  product: Product;
 }
 
 @ObjectType()
@@ -220,6 +239,13 @@ export class FillingMaterial extends BaseEntityWithTimestamps {
   @Column()
   @Field()
   materialName: string;
+
+  @OneToMany(
+    () => ProductDetails,
+    (productDetails) => productDetails.fillingMaterial,
+  )
+  @Field(() => [ProductDetails])
+  productDetails: ProductDetails;
 }
 
 @ObjectType()
@@ -252,4 +278,8 @@ export class Dimension extends BaseEntityWithTimestamps {
   @Column()
   @Field()
   legHeight: string;
+
+  @OneToMany(() => Product, (product) => product.dimension)
+  @Field(() => [Product])
+  product: Product;
 }
