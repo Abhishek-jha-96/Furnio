@@ -101,9 +101,12 @@ export class Warranty extends BaseEntityWithTimestamps {
   @Field()
   warrantySummary: string;
 
-  @ManyToOne(() => WarrantyServiceType, (warrantyServiceType) => warrantyServiceType.warranty)
+  @ManyToOne(
+    () => WarrantyServiceType,
+    (warrantyServiceType) => warrantyServiceType.warranty,
+  )
   @Field(() => [WarrantyServiceType])
-  warrantyServiceType: WarrantyServiceType[]; 
+  warrantyServiceType: WarrantyServiceType[];
 
   @Column()
   @Field()
