@@ -24,6 +24,22 @@ export abstract class BaseEntityWithTimestamps {
 
 @ObjectType()
 @Entity()
+export class ImageLinks extends BaseEntityWithTimestamps {
+  @PrimaryGeneratedColumn('uuid')
+  @Field()
+  id: string;
+
+  @Column()
+  @Field()
+  url: string;
+
+  @Column()
+  @Field()
+  uploadedBy: string;
+}
+
+@ObjectType()
+@Entity()
 export class Product extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => String)
@@ -143,22 +159,6 @@ export class WarrantyServiceType extends BaseEntityWithTimestamps {
 
 @ObjectType()
 @Entity()
-export class ImageLinks extends BaseEntityWithTimestamps {
-  @PrimaryGeneratedColumn('uuid')
-  @Field()
-  id: string;
-
-  @Column()
-  @Field()
-  url: string;
-
-  @Column()
-  @Field()
-  uploadedBy: string;
-}
-
-@ObjectType()
-@Entity()
 export class Tags extends BaseEntityWithTimestamps {
   @PrimaryGeneratedColumn('uuid')
   @Field()
@@ -201,7 +201,7 @@ export class GeneralDetail extends BaseEntityWithTimestamps {
     (upholsteryMaterial) => upholsteryMaterial.generalDetail,
     { cascade: true },
   )
-  @Field()
+  @Field(() => [UpholesteryMaterial])
   upholsteryMaterial: UpholesteryMaterial[];
 
   @Column()
