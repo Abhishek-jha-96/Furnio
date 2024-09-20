@@ -37,14 +37,6 @@ export class Product extends BaseEntityWithTimestamps {
   @Field()
   price: number;
 
-  @Column()
-  @Field()
-  rating: string; // fk
-
-  @Column()
-  @Field()
-  category: string; // fk
-
   @OneToOne(() => ImageLinks, { cascade: true, nullable: true })
   @Field(() => ImageLinks, { nullable: true })
   imageLinks: ImageLinks;
@@ -91,13 +83,59 @@ export class Product extends BaseEntityWithTimestamps {
   @Field(() => [Dimension])
   dimension: Dimension[];
 
-  @Column()
-  @Field()
-  warranty: string; // fk
+  @ManyToOne(() => Warranty, (warranty) => warranty.product, {
+    cascade: true,
+  })
+  @Field(() => [Warranty])
+  warranty: Warranty[];
+}
+
+@ObjectType()
+@Entity()
+export class Warranty extends BaseEntityWithTimestamps {
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => String)
+  id: string;
 
   @Column()
   @Field()
-  review: string; // fk
+  warrantySummary: string;
+
+  @ManyToOne(() => WarrantyServiceType, (warrantyServiceType) => warrantyServiceType.warranty)
+  @Field(() => [WarrantyServiceType])
+  warrantyServiceType: WarrantyServiceType[]; 
+
+  @Column()
+  @Field()
+  coveredInWarranty: string;
+
+  @Column()
+  @Field()
+  notCoveredInWarranty: string;
+
+  @Column()
+  @Field()
+  DomesticWarranty: string;
+
+  @OneToMany(() => Product, (product) => product.warranty)
+  @Field(() => [Product])
+  product: Product;
+}
+
+@ObjectType()
+@Entity()
+export class WarrantyServiceType extends BaseEntityWithTimestamps {
+  @PrimaryGeneratedColumn('uuid')
+  @Field(() => String)
+  id: string;
+
+  @Column()
+  @Field()
+  typeName: string;
+
+  @OneToMany(() => Warranty, (warranty) => warranty.warrantyServiceType)
+  @Field(() => [Warranty])
+  warranty: Warranty[];
 }
 
 @ObjectType()
