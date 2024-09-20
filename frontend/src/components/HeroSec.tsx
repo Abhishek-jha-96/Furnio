@@ -1,5 +1,5 @@
-import Image from "next/image";
-import main_bg from "../../public/furniro_assets/scandinavian-interior-mockup-wall-decal-background 1.png";
+import Image from 'next/image';
+import main_bg from '../../public/furniro_assets/scandinavian-interior-mockup-wall-decal-background 1.png';
 
 export default function HeroSec() {
   return (
@@ -20,7 +20,9 @@ export default function HeroSec() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
           tellus, luctus nec ullamcorper mattis.
         </p>
-        <button className="bg-[#B88E2F] w-full md:w-48 py-4 text-white">BUY NOW</button>
+        <button className="bg-[#B88E2F] w-full md:w-48 py-4 text-white">
+          BUY NOW
+        </button>
       </div>
     </div>
   );

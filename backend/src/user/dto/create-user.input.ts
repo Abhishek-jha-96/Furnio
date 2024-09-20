@@ -1,4 +1,4 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
 import {
   IsBoolean,
   IsEmail,
@@ -13,27 +13,35 @@ export class CreateUserInput {
   @Field()
   @IsNotEmpty()
   @MaxLength(100)
-  name: string;
+  @MinLength(3)
+  first_name: string;
+
+  @Field()
+  @IsOptional()
+  @MaxLength(100)
+  last_name: string;
 
   @Field()
   @IsEmail()
   email: string;
 
-  @Field(() => Int, { nullable: true })
+  @Field()
   @IsOptional()
-  age: number;
+  image: string;
 
   @Field()
   @IsBoolean()
   isActive: boolean;
 
   @Field()
+  @IsBoolean()
+  isVerified: boolean;
+
+  @Field()
   @IsNotEmpty()
   createdAt: Date;
 
   @Field()
-  @IsNotEmpty()
-  @MinLength(8)
-  @MaxLength(255)
-  password: string;
+  @IsOptional()
+  deletedAt: Date;
 }
