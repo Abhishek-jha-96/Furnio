@@ -3,4 +3,7 @@ export type RegisterRequestDto = {
   last_name: string;
   email: string;
   password: string;
+  image: string;
+  isActive: boolean;
+  isVerified: boolean;
 };

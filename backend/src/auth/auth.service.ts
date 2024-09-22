@@ -5,6 +5,7 @@ import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 import { RegisterRequestDto } from './dtos/register-request.dto';
 import { AccessToken } from './types/AccessToken';
+import { CreateUserInput } from 'src/user/dto/create-user.input';
 
 @Injectable()
 export class AuthService {
@@ -23,7 +24,8 @@ export class AuthService {
     if (!user) {
       throw new BadRequestException('User not found');
     }
-    const isMatch: boolean = await bycrypt.compareSync(password, user.password);
+    const isMatch: boolean = await bycrypt.compare(password, user.password);
+
     if (!isMatch) {
       throw new BadRequestException('Password does not match');
     }
@@ -35,12 +37,13 @@ export class AuthService {
   }
 
   async register(user: RegisterRequestDto): Promise<AccessToken> {
-    const existingUser = this.userService.findOne(user.email);
+    const existingUser = await this.userService.findOne(user.email);
+
     if (existingUser) {
       throw new BadRequestException('User already exists');
     }
     const hashedPassword = await bycrypt.hash(user.password, 10);
-    const newUser: Partial<User> = {
+    const newUser: CreateUserInput = {
       ...user,
       password: hashedPassword,
     };
