@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
@@ -11,9 +10,9 @@ export class UserService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  async create(createUserInput: CreateUserInput) {
+  async create(UserInput: Partial<User>): Promise<User> {
     try {
-      const user = this.userRepository.create(createUserInput);
+      const user = this.userRepository.create(UserInput);
       return await this.userRepository.save(user);
     } catch (error) {
       if (error instanceof QueryFailedError) {

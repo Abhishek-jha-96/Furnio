@@ -8,14 +8,13 @@ input CreateProductInput {
 }
 
 input CreateUserInput {
-  createdAt: DateTime!
-  deletedAt: DateTime!
   email: String!
   first_name: String!
   image: String!
   isActive: Boolean!
   isVerified: Boolean!
   last_name: String!
+  password: String!
 }
 
 """
@@ -69,7 +68,7 @@ type Mutation {
   createProduct(createProductInput: CreateProductInput!): Product!
   createUser(createUserInput: CreateUserInput!): User!
   removeProduct(id: Int!): Product!
-  removeUser(id: Int!): User!
+  removeUser(uid: String!): User!
   updateProduct(updateProductInput: UpdateProductInput!): Product!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
@@ -107,7 +106,7 @@ type ProductDetails {
 
 type Query {
   product(id: Int!): Product!
-  user(id: Int!): User!
+  user(uid: String!): User!
 }
 
 type Tags {
@@ -125,14 +124,13 @@ input UpdateProductInput {
 }
 
 input UpdateUserInput {
-  createdAt: DateTime
-  deletedAt: DateTime
   email: String
   first_name: String
   image: String
   isActive: Boolean
   isVerified: Boolean
   last_name: String
+  password: String
   uid: String!
 }
 
@@ -153,6 +151,7 @@ type User {
   isActive: Boolean!
   isVerified: Boolean!
   last_name: String
+  password: String!
   uid: String!
 }
 
