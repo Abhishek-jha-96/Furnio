@@ -151,7 +151,6 @@ type User {
   isActive: Boolean!
   isVerified: Boolean!
   last_name: String
-  password: String!
   uid: String!
 }
 

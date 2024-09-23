@@ -3,6 +3,7 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { DeleteResult, QueryFailedError, Repository } from 'typeorm';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class UserService {
@@ -26,8 +27,13 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  async findOne(email: string): Promise<User> {
-    return await this.userRepository.findOneBy({ email });
+  async findOne(email: string, options?: { groups: string[] }): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (user && options?.groups?.includes('internal')) {
+      // This ensures the password is included when the 'internal' group is specified
+      return plainToClass(User, user, { groups: options.groups });
+    }
+    return user;
   }
 
   async update(uid: string, updateUserInput: UpdateUserInput): Promise<User> {

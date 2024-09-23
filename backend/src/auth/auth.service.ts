@@ -20,11 +20,29 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<User> {
-    const user: User = await this.userService.findOne(email);
+    const user: User = await this.userService.findOne(email, {
+      groups: ['internal'],
+    });
     if (!user) {
       throw new BadRequestException('User not found');
     }
-    const isMatch: boolean = await bycrypt.compare(password, user.password);
+
+    if (!user.password) {
+      console.error('User found but password is missing in the database');
+      throw new BadRequestException('Invalid user data');
+    }
+
+    if (!password) {
+      throw new BadRequestException('Password is required');
+    }
+
+    let isMatch: boolean;
+    try {
+      isMatch = await bycrypt.compare(password, user.password);
+    } catch (error) {
+      console.error('Error comparing passwords:', error);
+      throw new BadRequestException('Error validating credentials');
+    }
 
     if (!isMatch) {
       throw new BadRequestException('Password does not match');
