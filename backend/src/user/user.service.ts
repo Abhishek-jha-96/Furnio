@@ -27,6 +27,10 @@ export class UserService {
     return await this.userRepository.find();
   }
 
+  async findOneByUID(uid: string): Promise<User> {
+    return await this.userRepository.findOneBy({ uid });
+  }
+
   async findOne(email: string, options?: { groups: string[] }): Promise<User> {
     const user = await this.userRepository.findOne({ where: { email } });
     if (user && options?.groups?.includes('internal')) {
