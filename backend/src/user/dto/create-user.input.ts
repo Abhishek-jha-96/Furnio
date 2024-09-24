@@ -39,9 +39,5 @@ export class CreateUserInput {
 
   @Field()
   @IsNotEmpty()
-  createdAt: Date;
-
-  @Field()
-  @IsOptional()
-  deletedAt: Date;
+  password: string;
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { DeleteResult, QueryFailedError, Repository } from 'typeorm';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class UserService {
@@ -11,9 +11,9 @@ export class UserService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
-  async create(createUserInput: CreateUserInput) {
+  async create(UserInput: Partial<User>): Promise<User> {
     try {
-      const user = this.userRepository.create(createUserInput);
+      const user = this.userRepository.create(UserInput);
       return await this.userRepository.save(user);
     } catch (error) {
       if (error instanceof QueryFailedError) {
@@ -27,8 +27,17 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  async findOne(uid: string): Promise<User> {
+  async findOneByUID(uid: string): Promise<User> {
     return await this.userRepository.findOneBy({ uid });
+  }
+
+  async findOne(email: string, options?: { groups: string[] }): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (user && options?.groups?.includes('internal')) {
+      // This ensures the password is included when the 'internal' group is specified
+      return plainToClass(User, user, { groups: options.groups });
+    }
+    return user;
   }
 
   async update(uid: string, updateUserInput: UpdateUserInput): Promise<User> {

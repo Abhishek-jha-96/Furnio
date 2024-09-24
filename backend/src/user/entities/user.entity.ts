@@ -1,4 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
+import { Exclude, Expose } from 'class-transformer';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -29,6 +30,11 @@ export class User {
   @Column()
   @Field({ nullable: true })
   image: string;
+
+  @Column()
+  @Exclude({ toPlainOnly: true })
+  @Expose({ groups: ['internal'] })
+  password: string;
 
   @Column({ default: true })
   @Field()
