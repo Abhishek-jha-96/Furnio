@@ -28,7 +28,6 @@ export class AuthService {
     }
 
     if (!user.password) {
-      console.error('User found but password is missing in the database');
       throw new BadRequestException('Invalid user data');
     }
 
