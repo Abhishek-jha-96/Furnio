@@ -3,26 +3,24 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserModule } from 'src/user/user.module';
 import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LocalStrategy } from './strategy/local.strategy';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { JwtConfigModule } from 'src/jwt/jwt-condig.module';
+import { JwtConfigService } from 'src/jwt/jwt-config.service';
 
 @Module({
   imports: [
     UserModule,
+    JwtConfigModule,
     JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
+      imports: [JwtConfigModule],
+      useFactory: async (jwtConfigService: JwtConfigService) => ({
+        secret: jwtConfigService.secret,
         signOptions: {
-          expiresIn: parseInt(
-            configService.getOrThrow<string>(
-              'ACCESS_TOKEN_VALIDITY_DURATION_IN_SEC',
-            ),
-          ),
+          expiresIn: jwtConfigService.expiresIn,
         },
       }),
-      inject: [ConfigService],
+      inject: [JwtConfigService],
     }),
   ],
   controllers: [AuthController],
