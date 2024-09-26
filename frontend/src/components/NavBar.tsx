@@ -2,7 +2,7 @@ import Image from 'next/image';
 import main_logo from '../../public/furniro_assets/Meubel House_Logos-05.png';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Heart, Search, ShoppingCartIcon } from 'lucide-react';
-import Link from 'next/link'
+import Link from 'next/link';
 
 const MenuProps = [
   {
@@ -44,11 +44,11 @@ export default function NavBar() {
       </div>
       {/* icons */}
       <div className="flex items-center justify-center gap-[3vw]">
-        <Link href='/auth'>
-        <Avatar className="w-7 h-7">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
+        <Link href="/auth">
+          <Avatar className="w-7 h-7">
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
         </Link>
         <Search />
         <Heart />

@@ -45,10 +45,13 @@ export default function Auth() {
             </form>
           </CardContent>
           <CardFooter className="flex flex-col justify-center gap-5">
-            <Button asChild className='w-1/3'>
+            <Button asChild className="w-1/3">
               <Link href="/login">Login</Link>
             </Button>
-            <div className='text-gray-600'>Don&apos;t have an account? <span className='text-wood hover:cursor-pointer'>Sign Up </span></div>
+            <div className="text-gray-600">
+              Don&apos;t have an account?{' '}
+              <span className="text-wood hover:cursor-pointer">Sign Up </span>
+            </div>
           </CardFooter>
         </Card>
       </div>
