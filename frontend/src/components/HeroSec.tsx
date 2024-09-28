@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import main_bg from '../../public/furniro_assets/scandinavian-interior-mockup-wall-decal-background 1.png';
 
 export default function HeroSec() {
