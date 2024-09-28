@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import main_logo from '../../../public/furniro_assets/Meubel House_Logos-05.png';
 import loginArt from '../../../public/vecteezyretro-interiorillustrativebackground2ep0822-rev2.png';
 import signUp from '../../../public/vecteezyretro-interiors-backgrounden0822_generated.jpg';
@@ -101,11 +101,16 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
               <div>
                 <div className="mb-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" placeholder="email" type='email' required/>
+                  <Input id="email" placeholder="email" type="email" required />
                 </div>
                 <div className="mb-2">
                   <Label htmlFor="password">Password</Label>
-                  <Input id="password" type="password" required placeholder="password"/>
+                  <Input
+                    id="password"
+                    type="password"
+                    required
+                    placeholder="password"
+                  />
                 </div>
                 {isSignUp && (
                   <div className="mb-2">

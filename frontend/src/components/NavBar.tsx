@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import main_logo from '../../public/furniro_assets/Meubel House_Logos-05.png';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Heart, Search, ShoppingCartIcon } from 'lucide-react';

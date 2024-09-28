@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { GitCompareArrows, Heart, Share2 } from 'lucide-react';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 
 interface ProductCardProps {
   imageUrl: string;
