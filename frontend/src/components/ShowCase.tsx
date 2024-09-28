@@ -1,5 +1,5 @@
 import Living from '../../public/furniro_assets/Living1.png';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import CustomSlider from './CustomSlider';
 
 export default function ShowCase() {
