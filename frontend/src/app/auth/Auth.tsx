@@ -49,7 +49,13 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
               exit={{ opacity: 0, x: '-100%' }}
               transition={{ duration: 0.5 }}
             >
-              <Image src={loginArt} alt="login" layout="fill" objectFit="cover" className="opacity-90" />
+              <Image
+                src={loginArt}
+                alt="login"
+                layout="fill"
+                objectFit="cover"
+                className="opacity-90"
+              />
             </motion.div>
           ) : (
             <motion.div
@@ -60,14 +66,20 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.5 }}
             >
-              <Image src={signUp} alt="signup" layout="fill" objectFit="cover" className="opacity-90" />
+              <Image
+                src={signUp}
+                alt="signup"
+                layout="fill"
+                objectFit="cover"
+                className="opacity-90"
+              />
             </motion.div>
           )}
         </AnimatePresence>
 
         <motion.div
           className="bg-white p-8 w-[38%] z-10"
-          initial={{x: '160%'}}
+          initial={{ x: '160%' }}
           animate={isImageLeft ? 'right' : 'left'}
           variants={variants}
           transition={{ duration: 0.5 }}
@@ -121,7 +133,9 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
                   transition={{ duration: 0.3 }}
                   className=""
                 >
-                  {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
+                  {isSignUp
+                    ? 'Already have an account? '
+                    : "Don't have an account? "}
                   <SignUpButton onClick={handleToggle}>
                     {isSignUp ? 'Sign In' : 'Sign Up'}
                   </SignUpButton>

@@ -3,7 +3,7 @@
 import { LoginProps } from '@/lib/login';
 import React, { useState } from 'react';
 
-const SignUpButton = ({onClick, children }:LoginProps) => {
+const SignUpButton = ({ onClick, children }: LoginProps) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
@@ -14,10 +14,7 @@ const SignUpButton = ({onClick, children }:LoginProps) => {
   };
 
   return (
-    <span 
-      className="text-wood hover:cursor-pointer"
-      onClick={handleClick}
-    >
+    <span className="text-wood hover:cursor-pointer" onClick={handleClick}>
       {children}
     </span>
   );
