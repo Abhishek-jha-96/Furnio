@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { SignUpProps } from '@/lib/login';
 import { motion, AnimatePresence } from 'framer-motion';
-import { createApi } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react';
 
 import SignUpButton from '@/components/login/SignUpButton';
 import main_logo from '../../../public/furniro_assets/Meubel House_Logos-05.png';
