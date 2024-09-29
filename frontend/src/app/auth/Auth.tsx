@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/legacy/image';
-import main_logo from '../../../public/furniro_assets/Meubel House_Logos-05.png';
-import loginArt from '../../../public/vecteezyretro-interiorillustrativebackground2ep0822-rev2.png';
-import signUp from '../../../public/vecteezyretro-interiors-backgrounden0822_generated.jpg';
 import {
   Card,
   CardContent,
@@ -13,9 +10,14 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import SignUpButton from '@/components/login/SignUpButton';
 import { SignUpProps } from '@/lib/login';
 import { motion, AnimatePresence } from 'framer-motion';
+import { createApi } from '@reduxjs/toolkit/query/react'
+
+import SignUpButton from '@/components/login/SignUpButton';
+import main_logo from '../../../public/furniro_assets/Meubel House_Logos-05.png';
+import loginArt from '../../../public/vecteezyretro-interiorillustrativebackground2ep0822-rev2.png';
+import signUp from '../../../public/vecteezyretro-interiors-backgrounden0822_generated.jpg';
 
 export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   const [isImageLeft, setIsImageLeft] = useState(true);
