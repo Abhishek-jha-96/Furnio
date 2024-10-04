@@ -12,15 +12,21 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { SignUpProps } from '@/lib/login';
 import { motion, AnimatePresence } from 'framer-motion';
-import { createApi } from '@reduxjs/toolkit/query/react';
 
 import SignUpButton from '@/components/login/SignUpButton';
 import main_logo from '../../../public/furniro_assets/Meubel House_Logos-05.png';
-import loginArt from '../../../public/vecteezyretro-interiorillustrativebackground2ep0822-rev2.png';
-import signUp from '../../../public/vecteezyretro-interiors-backgrounden0822_generated.jpg';
+import { useLoginMutation, useSignUpMutation } from '@/lib/store/service/loginQuery';
+import { AlertDestructive } from '@/components/login/Alert';
+import Spinner from '@/components/login/Spinner';
+import ImageSec from './ImageSec';
 
 export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   const [isImageLeft, setIsImageLeft] = useState(true);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [login, { isLoading: isLoginLoading, isError: isLoginError, error: loginError }] = useLoginMutation();
+  const [signUp, { isLoading: isSignupLoading, isError: isSignupError, error: signupError }] = useSignUpMutation();
 
   const handleToggle = () => {
     setIsImageLeft(!isImageLeft);
@@ -38,47 +44,48 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
     exit: { opacity: 0 },
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      if (isSignUp) {
+        // Call the sign-up mutation
+        const credentials = {
+          'email': email,
+          'password': password,
+          'confirmPassword': confirmPassword
+        }
+        const result = await signUp(credentials).unwrap();
+        console.log('Sign-up successful:', result);
+      } else {
+        // Call the login mutation
+        const credentials = {
+          'email': email,
+          'password': password
+        }
+        const result = await login(credentials).unwrap();
+        console.log('Login successful:', result);
+      }
+    } catch (err) {
+      console.error('Failed to authenticate:', err);
+    }
+  };
+
+  const getErrorMessage = (error: any) => {
+    if (error && 'data' in error) {
+      console.log(error.data);
+      return error.data;
+    }
+    return 'An error occurred';
+  };
+  console.log(isLoginError);
+
   return (
     <main className="w-full h-screen bg-[#fff4e3] flex justify-center items-center overflow-hidden">
+      {isLoginError && <AlertDestructive error={getErrorMessage(loginError)} />}
+      {isSignupError && <AlertDestructive error={getErrorMessage(signupError)} />}
+      {(isLoginLoading || isSignupLoading) && <Spinner />}
       <Card className="w-[65%] h-[80%] flex rounded-none justify-between relative overflow-hidden">
-        <AnimatePresence initial={false}>
-          {isImageLeft ? (
-            <motion.div
-              key="image-left"
-              className="absolute left-0 top-0 w-[62%] h-full"
-              initial={{ opacity: 0, x: '-100%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: '-100%' }}
-              transition={{ duration: 0.5 }}
-            >
-              <Image
-                src={loginArt}
-                alt="login"
-                layout="fill"
-                objectFit="cover"
-                className="opacity-90"
-              />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="image-right"
-              className="absolute right-0 top-0 w-[62%] h-full"
-              initial={{ opacity: 0, x: '100%' }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: '100%' }}
-              transition={{ duration: 0.5 }}
-            >
-              <Image
-                src={signUp}
-                alt="signup"
-                layout="fill"
-                objectFit="cover"
-                className="opacity-90"
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-
+      <ImageSec isImageLeft={isImageLeft}/>
         <motion.div
           className="bg-white p-8 w-[38%] z-10"
           initial={{ x: '160%' }}
@@ -98,12 +105,19 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
               {isSignUp ? 'Sign Up' : 'Login'}
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <form>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <CardContent>
               <div>
                 <div className="mb-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" placeholder="email" type="email" required />
+                  <Input
+                    id="email"
+                    placeholder="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="mb-2">
                   <Label htmlFor="password">Password</Label>
@@ -111,6 +125,8 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
                     id="password"
                     type="password"
                     required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="password"
                   />
                 </div>
@@ -121,36 +137,40 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
                       id="confirmPassword"
                       type="password"
                       placeholder="confirm password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                       required
                     />
                   </div>
                 )}
               </div>
-            </form>
-          </CardContent>
-          <CardFooter className="flex flex-col justify-center gap-5">
-            <Button className="w-full">{isSignUp ? 'Sign Up' : 'Login'}</Button>
-            <div className="text-gray-600 h-[50px]">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={isSignUp ? 'signup' : 'login'}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  variants={textVariants}
-                  transition={{ duration: 0.3 }}
-                  className=""
-                >
-                  {isSignUp
-                    ? 'Already have an account? '
-                    : "Don't have an account? "}
-                  <SignUpButton onClick={handleToggle}>
-                    {isSignUp ? 'Sign In' : 'Sign Up'}
-                  </SignUpButton>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </CardFooter>
+            </CardContent>
+            <CardFooter className="flex flex-col justify-center gap-5">
+              <Button type={'submit'} className="w-full">
+                {isSignUp ? 'Sign Up' : 'Login'}
+              </Button>
+              <div className="text-gray-600 h-[50px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={isSignUp ? 'signup' : 'login'}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={textVariants}
+                    transition={{ duration: 0.3 }}
+                    className=""
+                  >
+                    {isSignUp
+                      ? 'Already have an account? '
+                      : "Don't have an account? "}
+                    <SignUpButton onClick={handleToggle}>
+                      {isSignUp ? 'Sign In' : 'Sign Up'}
+                    </SignUpButton>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </CardFooter>
+          </form>
         </motion.div>
       </Card>
     </main>

@@ -1,8 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { userSlice } from './initializeUser';
+import { loginApi } from './service/loginQuery';
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: {
+      user: userSlice.reducer,
+      [loginApi.reducerPath]: loginApi.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(loginApi.middleware),
   });
 };
 
