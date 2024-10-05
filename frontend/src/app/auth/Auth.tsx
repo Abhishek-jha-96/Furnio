@@ -65,7 +65,6 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
       }, 1500); // 1.5 seconds
       return () => clearTimeout(timer);
     }
-
   }, [isLoginError]);
 
   useEffect(() => {
@@ -80,7 +79,9 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
 
   return (
     <main className="w-full h-screen bg-[#fffefb] flex justify-center items-center overflow-hidden">
-      {showLoginError && <AlertDestructive error={getErrorMessage(loginError)} />}
+      {showLoginError && (
+        <AlertDestructive error={getErrorMessage(loginError)} />
+      )}
       {showSignupError && (
         <AlertDestructive error={getErrorMessage(signupError)} />
       )}
