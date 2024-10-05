@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SignUpProps } from '@/lib/login';
 import {
   useLoginMutation,
@@ -12,6 +12,8 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [showLoginError, setShowLoginError] = useState<boolean>(false);
+  const [showSignupError, setShowSignupError] = useState<boolean>(false);
   const [
     login,
     { isLoading: isLoginLoading, isError: isLoginError, error: loginError },
@@ -32,7 +34,6 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
           confirmPassword: confirmPassword,
         };
         const result = await signUp(credentials).unwrap();
-        console.log('Sign-up successful:', result);
       } else {
         // Call the login mutation
         const credentials = {
@@ -40,7 +41,6 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
           password: password,
         };
         const result = await login(credentials).unwrap();
-        console.log('Login successful:', result);
       }
     } catch (err) {
       console.error('Failed to authenticate:', err);
@@ -48,7 +48,6 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   };
 
   const getErrorMessage = (error: any) => {
-    console.log('Error object:', error); // Check the error structure
     if (error && 'data' in error) {
       if (error.data.message) {
         return error.data.message;
@@ -58,10 +57,31 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
     return 'An error occurred';
   };
 
+  useEffect(() => {
+    if (isLoginError) {
+      setShowLoginError(true);
+      const timer = setTimeout(() => {
+        setShowLoginError(false);
+      }, 1500); // 1.5 seconds
+      return () => clearTimeout(timer);
+    }
+
+  }, [isLoginError]);
+
+  useEffect(() => {
+    if (isSignupError) {
+      setShowSignupError(true);
+      const timer = setTimeout(() => {
+        setShowSignupError(false);
+      }, 1500); // 1.5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [isSignupError]);
+
   return (
     <main className="w-full h-screen bg-[#fffefb] flex justify-center items-center overflow-hidden">
-      {isLoginError && <AlertDestructive error={getErrorMessage(loginError)} />}
-      {isSignupError && (
+      {showLoginError && <AlertDestructive error={getErrorMessage(loginError)} />}
+      {showSignupError && (
         <AlertDestructive error={getErrorMessage(signupError)} />
       )}
       {(isLoginLoading || isSignupLoading) && <Spinner />}

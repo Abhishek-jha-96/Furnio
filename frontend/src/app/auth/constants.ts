@@ -1,14 +1,13 @@
 export const variants = {
-    left: { x: 0 },
-    right: { x: '160%' },
-  };
+  left: { x: 0 },
+  right: { x: '160%' },
+};
 
 export const textVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
-
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 export interface AuthFormProps {
   isSignUp: boolean;
@@ -20,5 +19,4 @@ export interface AuthFormProps {
   setEmail: (e: string) => void;
   setPassword: (e: string) => void;
   setConfirmPassword: (e: string) => void;
-
 }
