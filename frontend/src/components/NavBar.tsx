@@ -59,7 +59,9 @@ export default function NavBar() {
           </Link>
         ) : (
           <Link href="/auth">
-          <Button variant={'default'} className='bg-wood hover:bg-yellow-700'>Login</Button>
+            <Button variant={'default'} className="bg-wood hover:bg-yellow-700">
+              Login
+            </Button>
           </Link>
         )}
         <Search />

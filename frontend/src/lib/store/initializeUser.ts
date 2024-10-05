@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { UserProps } from '../login'
+import { UserProps } from '../login';
 
 // Initial state for the user
 const initialState: UserProps = {
@@ -14,7 +14,7 @@ const initialState: UserProps = {
   isVerified: false,
   createdAt: null,
   updatedAt: null,
-}
+};
 
 // Create the user slice
 export const userSlice = createSlice({
@@ -23,7 +23,17 @@ export const userSlice = createSlice({
   reducers: {
     // Log in a user (sets their data)
     login: (state, action: PayloadAction<UserProps>) => {
-      const { uid, first_name, last_name, email, image, isActive, isVerified, createdAt, updatedAt } = action.payload;
+      const {
+        uid,
+        first_name,
+        last_name,
+        email,
+        image,
+        isActive,
+        isVerified,
+        createdAt,
+        updatedAt,
+      } = action.payload;
       state.uid = uid;
       state.first_name = first_name;
       state.last_name = last_name;
@@ -68,9 +78,16 @@ export const userSlice = createSlice({
       state.isActive = false;
     },
   },
-})
+});
 
 // Action creators are generated for each case reducer function
-export const { login, logout, updateProfile, activateUser, verifyUser, deactivateUser } = userSlice.actions
+export const {
+  login,
+  logout,
+  updateProfile,
+  activateUser,
+  verifyUser,
+  deactivateUser,
+} = userSlice.actions;
 
-export default userSlice.reducer
+export default userSlice.reducer;
