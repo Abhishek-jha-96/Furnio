@@ -15,7 +15,8 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [showLoginError, setShowLoginError] = useState<boolean>(false);
-  const [passwordMismatchError, setPasswordMismatchError] = useState<boolean>(false);
+  const [passwordMismatchError, setPasswordMismatchError] =
+    useState<boolean>(false);
   const [spinnerload, setSpinnerLoad] = useState<boolean>(false);
   const [showSignupError, setShowSignupError] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -58,12 +59,12 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
         // Handle successful login/signup
         // save the token in local storage
         localStorage.setItem('token', result.access_token);
-        
+
         setSpinnerLoad(true);
         setTimeout(() => {
-        setSpinnerLoad(false); // Hide spinner after 5 seconds
-        setIsAuthenticated(true); // Set authenticated to true after spinner load
-      }, 5000);
+          setSpinnerLoad(false); // Hide spinner after 5 seconds
+          setIsAuthenticated(true); // Set authenticated to true after spinner load
+        }, 5000);
       }
     } catch (err) {
       console.error('Failed to authenticate:', err);

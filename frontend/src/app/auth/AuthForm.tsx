@@ -61,7 +61,7 @@ export const AuthForm = ({
         <form onSubmit={(e) => handleSubmit(e)}>
           <CardContent>
             <div>
-            {isSignUp && (
+              {isSignUp && (
                 <div className="pb-2">
                   <Label htmlFor="confirmPassword">Name</Label>
                   <Input
