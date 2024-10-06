@@ -18,11 +18,13 @@ import SignUpButton from '@/components/login/SignUpButton';
 
 export const AuthForm = ({
   isSignUp,
+  name,
   email,
   password,
   confirmPassword,
   toggleSignUp,
   handleSubmit,
+  setName,
   setEmail,
   setPassword,
   setConfirmPassword,
@@ -35,10 +37,10 @@ export const AuthForm = ({
   };
 
   return (
-    <Card className="w-[65%] h-[80%] flex rounded-none justify-between relative overflow-hidden">
+    <Card className="w-[65%] h-fit flex rounded-none justify-between relative overflow-hidden">
       <ImageSec isImageLeft={isImageLeft} />
       <motion.div
-        className="bg-white p-8 w-[38%] z-10"
+        className="bg-white px-4 w-[38%] z-10"
         initial={{ x: '160%' }}
         animate={isImageLeft ? 'right' : 'left'}
         variants={variants}
@@ -52,14 +54,27 @@ export const AuthForm = ({
           <CardTitle className="text-sm font-light">
             Crafted for Comfort, Designed for You!
           </CardTitle>
-          <CardTitle className="w-full py-2 font-medium text-2xl text-gray-700">
+          <CardTitle className="w-full font-medium text-2xl text-gray-700">
             {isSignUp ? 'Sign Up' : 'Login'}
           </CardTitle>
         </CardHeader>
         <form onSubmit={(e) => handleSubmit(e)}>
           <CardContent>
             <div>
-              <div className="mb-2">
+            {isSignUp && (
+                <div className="pb-2">
+                  <Label htmlFor="confirmPassword">Name</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
+              )}
+              <div className="pb-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
@@ -70,7 +85,7 @@ export const AuthForm = ({
                   required
                 />
               </div>
-              <div className="mb-2">
+              <div className="pb-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
@@ -82,7 +97,7 @@ export const AuthForm = ({
                 />
               </div>
               {isSignUp && (
-                <div className="mb-2">
+                <div className="pb-2">
                   <Label htmlFor="confirmPassword">Confirm Password</Label>
                   <Input
                     id="confirmPassword"
@@ -96,7 +111,7 @@ export const AuthForm = ({
               )}
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col justify-center gap-5">
+          <CardFooter className="flex flex-col justify-center gap-3">
             <Button type={'submit'} className="w-full">
               {isSignUp ? 'Sign Up' : 'Login'}
             </Button>

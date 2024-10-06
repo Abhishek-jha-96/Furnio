@@ -11,11 +11,13 @@ export const textVariants = {
 
 export interface AuthFormProps {
   isSignUp: boolean;
+  name: string;
   email: string;
   password: string;
   confirmPassword?: string;
   toggleSignUp: () => void;
   handleSubmit: (e: React.FormEvent) => void;
+  setName: (e: string) => void;
   setEmail: (e: string) => void;
   setPassword: (e: string) => void;
   setConfirmPassword: (e: string) => void;
