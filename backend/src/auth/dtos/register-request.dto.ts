@@ -1,9 +1,9 @@
 export type RegisterRequestDto = {
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
-  image: string;
-  isActive: boolean;
-  isVerified: boolean;
+  first_name: string; // only this is required
+  email: string; // only this is required
+  password: string; // only this is required
+  last_name?: string;
+  image?: string;
+  isActive?: boolean;
+  isVerified?: boolean;
 };
