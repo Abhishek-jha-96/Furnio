@@ -61,8 +61,13 @@ export class AuthService {
     }
     const hashedPassword = await bycrypt.hash(user.password, 10);
     const newUser: CreateUserInput = {
-      ...user,
+      first_name: user.first_name,
+      last_name: user.last_name || '', // default to empty if not provided
+      email: user.email,
       password: hashedPassword,
+      image: user.image || '', // default to empty if not provided
+      isActive: user.isActive ?? true, // default to true if not provided
+      isVerified: user.isVerified ?? false,
     };
     const createdUser = await this.userService.create(newUser);
     return this.login(createdUser);
