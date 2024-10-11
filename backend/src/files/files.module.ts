@@ -8,9 +8,7 @@ import { FilesLocalModule } from './infrastructure/uploader/local/files.module';
 import { FilesS3Module } from './infrastructure/uploader/s3/files.module';
 import { FilesS3PresignedModule } from './infrastructure/uploader/s3-presigned/files.module';
 
-// <database-block>
 const infrastructurePersistenceModule = RelationalFilePersistenceModule;
-// </database-block>
 
 const infrastructureUploaderModule =
   (fileConfig() as FileConfig).driver === FileDriver.LOCAL

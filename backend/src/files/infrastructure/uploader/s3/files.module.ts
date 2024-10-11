@@ -15,9 +15,7 @@ import { FilesS3Service } from './files.service';
 import { RelationalFilePersistenceModule } from '../../persistence/relational/relational-persistence.module';
 import { AllConfigType } from '../../../../config/config.type';
 
-// <database-block>
 const infrastructurePersistenceModule = RelationalFilePersistenceModule;
-// </database-block>
 
 @Module({
   imports: [

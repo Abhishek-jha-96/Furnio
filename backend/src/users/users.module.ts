@@ -6,9 +6,7 @@ import { UsersService } from './users.service';
 import { RelationalUserPersistenceModule } from './infrastructure/persistence/relational/relational-persistence.module';
 import { FilesModule } from '../files/files.module';
 
-// <database-block>
 const infrastructurePersistenceModule = RelationalUserPersistenceModule;
-// </database-block>
 
 @Module({
   imports: [
