@@ -1,6 +1,7 @@
 {
   "name": "@furnio/frontend",
   "version": "0.1.0",
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/package.json",
   "private": true,
   "scripts": {
     "dev": "next dev",

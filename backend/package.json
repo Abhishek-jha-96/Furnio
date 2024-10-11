@@ -1,6 +1,7 @@
 {
-  "name": "nestjs-boilerplate",
+  "name": "@furnio/backend",
   "version": "1.2.0",
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/package.json",
   "description": "",
   "author": "",
   "private": true,
@@ -102,6 +103,7 @@
     "@swc/cli": "0.4.0",
     "@swc/core": "1.7.28",
     "@types/bcryptjs": "2.4.6",
+    "@types/estree": "^1.0.6",
     "@types/express": "5.0.0",
     "@types/facebook-js-sdk": "3.3.12",
     "@types/jest": "29.5.13",
