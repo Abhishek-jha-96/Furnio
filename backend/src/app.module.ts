@@ -27,13 +27,12 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import { AllConfigType } from './config/config.type';
 import { SessionModule } from './session/session.module';
 import { MailerModule } from './mailer/mailer.module';
-import { DatabaseConfig } from './database/config/database-config.type';
 
 // <database-block>
-const infrastructureDatabaseModule = databaseConfig() as DatabaseConfig;
-TypeOrmModule.forRootAsync({
+const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
   useClass: TypeOrmConfigService,
   dataSourceFactory: async (options: DataSourceOptions) => {
+    // You can still use config.isDocumentDatabase or other properties if needed
     return new DataSource(options).initialize();
   },
 });
