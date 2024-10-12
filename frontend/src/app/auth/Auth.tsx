@@ -44,7 +44,6 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
           first_name: name,
           email: email,
           password: password,
-          confirmPassword: confirmPassword,
         };
         result = await signUp(credentials).unwrap();
       } else {
@@ -55,10 +54,10 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
         };
         result = await login(credentials).unwrap();
       }
-      if (result.access_token) {
+      if (result.token) {
         // Handle successful login/signup
         // save the token in local storage
-        localStorage.setItem('token', result.access_token);
+        localStorage.setItem('token', result.token);
 
         setSpinnerLoad(true);
         setTimeout(() => {

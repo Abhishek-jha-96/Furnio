@@ -12,7 +12,7 @@ export default function CategoryCard({ imagePath, title }: CategoryCardProps) {
         src={imagePath}
         alt={title}
         width={300}
-        height={50}
+        height={450}
         className="object-cover rounded-md"
       />
       <h3 className="text-xl font-semibold">{title}</h3>
