@@ -29,14 +29,14 @@ export default function Gallery() {
             src={imageUrls[0]}
             alt="Furniture setup 1"
             width={320}
-            height={300}
+            height={400}
             className="rounded-lg"
           />
           <Image
             src={imageUrls[3]}
             alt="Furniture setup 4"
             width={320}
-            height={195}
+            height={400}
             className="rounded-lg mt-2"
           />
         </div>
@@ -45,30 +45,30 @@ export default function Gallery() {
             src={imageUrls[1]}
             alt="Furniture setup 2"
             width={350}
-            height={145}
+            height={200}
             className="rounded-lg"
           />
           <Image
             src={imageUrls[5]}
             alt="Furniture setup 6"
             width={350}
-            height={195}
+            height={200}
             className="rounded-lg"
           />
         </div>
-        <div className="flex flex-col flex-1 basis-1/5 min-w-[150px] justify-center">
+        <div className="flex flex-col flex-1 basis-1/5 min-w-[150px] justify-center gap-2">
           <Image
             src={imageUrls[5]}
             alt="Furniture setup 6"
-            width={500}
-            height={95}
+            width={350}
+            height={200}
             className="rounded-lg"
           />
           <Image
             src={imageUrls[6]}
             alt="Furniture setup 7"
-            width={500}
-            height={145}
+            width={350}
+            height={200}
             className="rounded-lg mt-2"
           />
         </div>
@@ -78,14 +78,14 @@ export default function Gallery() {
             src={imageUrls[7]}
             alt="Furniture setup 8"
             width={300}
-            height={145}
+            height={400}
             className="rounded-lg"
           />
           <Image
             src={imageUrls[8]}
             alt="Furniture setup 9"
             width={300}
-            height={300}
+            height={400}
             className="rounded-lg"
           />
         </div>
