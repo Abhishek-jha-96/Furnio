@@ -29,7 +29,7 @@ const MenuProps = [
 
 export default function NavBar() {
   const userData = useSelector((state: RootState) => state.user);
-
+  console.log(userData);
   return (
     <div className="w-full flex items-center justify-between py-4 px-2 md:px-16">
       {/* logo */}
@@ -50,13 +50,11 @@ export default function NavBar() {
       </div>
       {/* icons */}
       <div className="flex items-center justify-center gap-[3vw]">
-        {userData.uid !== '' ? (
-          <Link href="/auth">
+        {userData.id !== 0 ? (
             <Avatar className="w-7 h-7">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src="/" />
+              <AvatarFallback>{userData.first_name[0].toUpperCase()}{userData.last_name[0].toUpperCase()}</AvatarFallback>
             </Avatar>
-          </Link>
         ) : (
           <Link href="/auth">
             <Button variant={'default'} className="bg-wood hover:bg-yellow-700">
