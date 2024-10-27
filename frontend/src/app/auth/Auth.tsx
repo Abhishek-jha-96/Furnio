@@ -8,8 +8,11 @@ import { AlertDestructive } from '@/components/login/Alert';
 import Spinner from '@/components/login/Spinner';
 import { AuthForm } from './AuthForm';
 import { useRouter } from 'next/navigation';
+import { userSlice } from '@/lib/store/initializeUser';
+import { useAppDispatch } from '@/lib/store/hooks';
 
 export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
+  const dispatch = useAppDispatch();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
@@ -44,9 +47,12 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
           first_name: name,
           email: email,
           password: password,
-          confirmPassword: confirmPassword,
         };
         result = await signUp(credentials).unwrap();
+        if (!isSignupError) {
+          setSpinnerLoad(true);
+          setIsAuthenticated(true);
+        }
       } else {
         // Call the login mutation
         const credentials = {
@@ -54,17 +60,12 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
           password: password,
         };
         result = await login(credentials).unwrap();
-      }
-      if (result.access_token) {
-        // Handle successful login/signup
-        // save the token in local storage
-        localStorage.setItem('token', result.access_token);
-
-        setSpinnerLoad(true);
-        setTimeout(() => {
-          setSpinnerLoad(false); // Hide spinner after 5 seconds
-          setIsAuthenticated(true); // Set authenticated to true after spinner load
-        }, 5000);
+        if (!isLoginError) {
+          localStorage.setItem('token', result.token);
+          setSpinnerLoad(true);
+          dispatch(userSlice.actions.login(result.user));
+          setIsAuthenticated(true);
+        }
       }
     } catch (err) {
       console.error('Failed to authenticate:', err);
@@ -127,7 +128,7 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
       {passwordMismatchError && (
         <AlertDestructive error="Passwords do not match" />
       )}
-      {(isLoginLoading || isSignupLoading) && <Spinner />}
+      {spinnerload && <Spinner />}
       <AuthForm
         isSignUp={isSignUp}
         toggleSignUp={toggleSignUp}
