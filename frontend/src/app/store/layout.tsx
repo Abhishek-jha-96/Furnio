@@ -1,7 +1,7 @@
-import Footer from "@/components/Footer";
-import NavBar from "@/components/NavBar";
-import BaseBanner from "@/components/Store/Banner";
-import CoverBanner from "@/components/Store/CoverBanner";
+import Footer from '@/components/Footer';
+import NavBar from '@/components/NavBar';
+import BaseBanner from '@/components/Store/Banner';
+import CoverBanner from '@/components/Store/CoverBanner';
 
 export default function StoreLayout({
   children,
@@ -13,7 +13,7 @@ export default function StoreLayout({
       <NavBar />
       <CoverBanner />
       <div>{children}</div>
-      <BaseBanner/>
+      <BaseBanner />
       <Footer />
     </div>
   );

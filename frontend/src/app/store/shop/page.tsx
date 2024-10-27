@@ -1,9 +1,9 @@
-import Fliter from "./(components)/Fliter";
+import Fliter from './(components)/Fliter';
 
 export default function Shop() {
   return (
     <div>
-      <Fliter/>
+      <Fliter />
     </div>
-  )
+  );
 }

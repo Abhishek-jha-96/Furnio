@@ -13,7 +13,7 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'BannerCover': 'url("/furniro_assets/Living1.png")',
+        BannerCover: 'url("/furniro_assets/Living1.png")',
       },
       borderRadius: {
         lg: 'var(--radius)',
