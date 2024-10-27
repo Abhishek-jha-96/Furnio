@@ -31,7 +31,7 @@ export interface UserData {
   lastName: string;
   email: string;
   status: Status;
-  createdAt?: string | null; 
+  createdAt?: string | null;
   updatedAt?: string | null;
 }
 

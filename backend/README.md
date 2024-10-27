@@ -1,1 +1,0 @@
-# NestJS REST API for Furnio

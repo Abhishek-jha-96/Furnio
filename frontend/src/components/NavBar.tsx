@@ -51,10 +51,13 @@ export default function NavBar() {
       {/* icons */}
       <div className="flex items-center justify-center gap-[3vw]">
         {userData.id !== 0 ? (
-            <Avatar className="w-7 h-7">
-              <AvatarImage src="/" />
-              <AvatarFallback>{userData.first_name[0].toUpperCase()}{userData.last_name[0].toUpperCase()}</AvatarFallback>
-            </Avatar>
+          <Avatar className="w-7 h-7">
+            <AvatarImage src="/" />
+            <AvatarFallback>
+              {userData.first_name[0].toUpperCase()}
+              {userData.last_name[0].toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
         ) : (
           <Link href="/auth">
             <Button variant={'default'} className="bg-wood hover:bg-yellow-700">
