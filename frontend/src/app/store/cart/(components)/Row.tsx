@@ -1,9 +1,14 @@
-import { ProductTableProps } from "./constants";
+import { ProductTableProps } from './constants';
 
-export default function Row({Product, Price, Quantity, Subtotal} : ProductTableProps) {
+export default function Row({
+  Product,
+  Price,
+  Quantity,
+  Subtotal,
+}: ProductTableProps) {
   return (
     <div className="grid grid-cols-5 grid-rows-2 gap-8">
-        {/* handle the grid rows */}
+      {/* handle the grid rows */}
       <div className="col-span-2">
         <h3>{Product}</h3>
       </div>

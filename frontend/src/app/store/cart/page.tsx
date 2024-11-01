@@ -1,4 +1,4 @@
-import Row from "./(components)/Row";
+import Row from './(components)/Row';
 
 export default function Cart() {
   return (
@@ -6,10 +6,20 @@ export default function Cart() {
       <div className="flex gap-8">
         <section className="flex flex-col justify-between">
           <div className="flex bg-[#F9F1E7] py-1 px-4">
-           <Row Product="Product" Price="Price" Quantity="Quantity" Subtotal="Subtotal"/>
+            <Row
+              Product="Product"
+              Price="Price"
+              Quantity="Quantity"
+              Subtotal="Subtotal"
+            />
           </div>
           <div>
-          <Row Product="Product" Price="Price" Quantity="Quantity" Subtotal="Subtotal"/>
+            <Row
+              Product="Product"
+              Price="Price"
+              Quantity="Quantity"
+              Subtotal="Subtotal"
+            />
           </div>
         </section>
         <section>
