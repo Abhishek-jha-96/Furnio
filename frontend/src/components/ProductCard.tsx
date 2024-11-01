@@ -24,7 +24,7 @@ export default function ProductCard({
   originalPrice,
 }: ProductCardProps) {
   return (
-    <div className="relative group">
+    <div className="relative group w-48">
       <div className="hidden group-hover:flex transition-opacity ease-in-out duration-300 absolute inset-0 bg-black/60 items-center justify-center z-10">
         <div className="flex flex-col items-center space-y-4">
           <button className="bg-white text-black px-4 py-2 rounded">

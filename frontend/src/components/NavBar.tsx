@@ -15,15 +15,15 @@ const MenuProps = [
   },
   {
     name: 'Shop',
-    href: '/shop',
+    href: '/store/shop',
   },
   {
-    name: 'About',
-    href: '/about',
+    name: 'Blog',
+    href: '/store/blog',
   },
   {
     name: 'Contact',
-    href: '/contact',
+    href: '/store/contact',
   },
 ];
 
