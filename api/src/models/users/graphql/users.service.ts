@@ -12,7 +12,7 @@ import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcryptjs'
 import { v4 as uuid } from 'uuid'
 import { AuthProviderType } from '@prisma/client'
-import { INVALID_CRED_ERROR } from '../constants'
+import { INVALID_CRED_ERROR, USER_ALREADY_EXISTS_ERROR } from '../constants'
 
 @Injectable()
 export class UsersService {
@@ -53,7 +53,7 @@ export class UsersService {
       where: { email },
     })
     if (existingUser) {
-      throw new Error('User already exists with this email.')
+      throw new Error(USER_ALREADY_EXISTS_ERROR)
     }
 
     // Hash the password
