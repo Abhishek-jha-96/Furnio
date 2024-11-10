@@ -7,7 +7,7 @@ export default function Checkout() {
       <div className="w-1/2">
         <BillingForm />
       </div>
-      <div className='w-1/3'>
+      <div className="w-1/3">
         <PaymentCard />
       </div>
     </div>

@@ -3,8 +3,8 @@ import CustomInput from './CustomInput';
 
 export default function BillingForm() {
   return (
-    <div className='flex flex-col gap-6 px-4 py-8'>
-      <h1 className='font-semibold text-2xl'>Billing Details</h1>
+    <div className="flex flex-col gap-6 px-4 py-8">
+      <h1 className="font-semibold text-2xl">Billing Details</h1>
       <div className="flex gap-4">
         <CustomInput title="First Name" />
         <CustomInput title="Last Name" />

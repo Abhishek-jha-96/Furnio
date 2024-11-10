@@ -22,10 +22,14 @@ export default function PaymentCard() {
           <h2 className="font-semibold text-2xl text-wood">10000</h2>
         </div>
       </div>
-      <div className='flex flex-col gap-4'>
+      <div className="flex flex-col gap-4">
         <CustomCheckbox title="Direct Bank Transfer" />
         <CustomCheckbox title="Cash On Delivery" />
-        <h4 className='font-extralight text-zinc-700'>Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.</h4>
+        <h4 className="font-extralight text-zinc-700">
+          Your personal data will be used to support your experience throughout
+          this website, to manage access to your account, and for other purposes
+          described in our privacy policy.
+        </h4>
         <Button>Place Order</Button>
       </div>
     </div>

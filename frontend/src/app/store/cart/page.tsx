@@ -15,7 +15,7 @@ export default function Cart() {
               Subtotal="Subtotal"
             />
           </div>
-          <div className='flex px-4 py-1'>
+          <div className="flex px-4 py-1">
             <Row
               Product="Product"
               Price="Price"
@@ -24,20 +24,20 @@ export default function Cart() {
             />
           </div>
         </section>
-        <section className='flex flex-col gap-4 items-center bg-[#F9F1E7] px-16 py-10'>
-          <h1 className='font-semibold text-2xl'>Cart Totals</h1>
-          <div className='flex flex-col gap-4 w-44'>
-            <section className='flex justify-between'>
+        <section className="flex flex-col gap-4 items-center bg-[#F9F1E7] px-16 py-10">
+          <h1 className="font-semibold text-2xl">Cart Totals</h1>
+          <div className="flex flex-col gap-4 w-44">
+            <section className="flex justify-between">
               <h4>Subtotal</h4>
               <h4>10000</h4>
             </section>
-            <section className='flex justify-between'>
+            <section className="flex justify-between">
               <h2>Total</h2>
-              <h2 className='text-wood'>10000</h2>
+              <h2 className="text-wood">10000</h2>
             </section>
           </div>
           <Link href="/store/checkout">
-          <Button variant={'outline'}>Check Out</Button>
+            <Button variant={'outline'}>Check Out</Button>
           </Link>
         </section>
       </div>
