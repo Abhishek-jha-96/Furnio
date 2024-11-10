@@ -12,6 +12,7 @@ import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcryptjs'
 import { v4 as uuid } from 'uuid'
 import { AuthProviderType } from '@prisma/client'
+import { INVALID_CRED_ERROR } from '../constants'
 
 @Injectable()
 export class UsersService {
@@ -98,7 +99,7 @@ export class UsersService {
       !credentials ||
       !bcrypt.compareSync(password, credentials?.passwordHash)
     ) {
-      throw new BadRequestException('Invalid email or password')
+      throw new BadRequestException(INVALID_CRED_ERROR)
     }
 
     const token = this.jwt.sign({ uid: credentials.uid })
