@@ -7,7 +7,7 @@ export default function Row({
   Subtotal,
 }: ProductTableProps) {
   return (
-    <div className="grid grid-cols-5 grid-rows-2 gap-8">
+    <div className="grid grid-cols-5 grid-rows-1 gap-8 px-16 py-4">
       {/* handle the grid rows */}
       <div className="col-span-2">
         <h3>{Product}</h3>

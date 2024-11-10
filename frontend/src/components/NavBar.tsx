@@ -67,7 +67,9 @@ export default function NavBar() {
         )}
         <Search />
         <Heart />
+        <Link href="/store/cart">
         <ShoppingCartIcon />
+        </Link>
       </div>
     </div>
   );
