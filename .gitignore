@@ -11,4 +11,4 @@
 !.vscode/extensions.json
 
 # local env files
-.env*.local
+/api/.env
