@@ -13,5 +13,4 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
-# Command to run the application
-CMD ["npm", "run", "start:dev", "--host", "0.0.0.0"]
+CMD ["sh", "-c", "npx prisma migrate dev && npm run start:dev --host 0.0.0.0"]
