@@ -5,7 +5,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   app.enableCors()
-
+  const PORT = process.env.PORT || 3000
+  const HOST = '0.0.0.0'
   const config = new DocumentBuilder()
     .setTitle('Furnio | Abhishek')
     .setDescription(
@@ -25,6 +26,6 @@ You might also need to use the <a target="_blank" href="http://studio.apollograp
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('/', app, document)
 
-  await app.listen(3000)
+  await app.listen(PORT, HOST)
 }
 bootstrap()
