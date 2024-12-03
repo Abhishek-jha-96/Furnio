@@ -1,17 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { UserData, UserProps } from '../login';
+import { UserProps } from '../login';
 
 // Initial state for the user
 const initialState: UserProps = {
   id: 0,
-  first_name: '',
-  last_name: '',
+  name: '',
   email: '',
+  email_verified: false,
   isActive: false,
-  createdAt: null,
-  updatedAt: null,
 };
 
 // Create the user slice
@@ -20,48 +18,32 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     // Log in a user (sets their data)
-    login: (state, action: PayloadAction<UserData>) => {
-      const { id, firstName, lastName, email, status, createdAt, updatedAt } =
-        action.payload;
+    login: (state, action: PayloadAction<UserProps>) => {
+      const {
+        id,
+        name,
+        email,
+        email_verified,
+        isActive,
+      } = action.payload;
       state.id = id;
-      state.first_name = firstName;
-      state.last_name = lastName;
+      state.name = name;
       state.email = email;
-      state.isActive = status.name == 'Active' ? true : false;
-      state.createdAt = createdAt;
-      state.updatedAt = updatedAt;
+      state.email_verified = email_verified;
+      state.isActive = isActive;
     },
     // Log out a user (reset to initial state)
     logout: (state) => {
       state.id = initialState.id;
-      state.first_name = initialState.first_name;
-      state.last_name = initialState.last_name;
+      state.name = initialState.name;
       state.email = initialState.email;
+      state.email_verified = initialState.email_verified;
       state.isActive = initialState.isActive;
-      state.createdAt = initialState.createdAt;
-      state.updatedAt = initialState.updatedAt;
-    },
-    // Update user profile information
-    updateProfile: (state, action: PayloadAction<Partial<UserProps>>) => {
-      const { first_name, last_name, email } = action.payload;
-      if (first_name) state.first_name = first_name;
-      if (last_name) state.last_name = last_name;
-      if (email) state.email = email;
-      state.updatedAt = new Date().toISOString();
-    },
-    // Activate the user account by email
-    activateUser: (state) => {
-      state.isActive = true;
-    },
-    // Deactivate the user account
-    deactivateUser: (state) => {
-      state.isActive = false;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { login, logout, updateProfile, activateUser, deactivateUser } =
-  userSlice.actions;
+export const { login, logout } = userSlice.actions;
 
 export default userSlice.reducer;

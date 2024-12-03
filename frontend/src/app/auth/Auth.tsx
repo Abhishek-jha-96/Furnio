@@ -44,7 +44,7 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
           return;
         }
         const credentials = {
-          first_name: name,
+          name: name,
           email: email,
           password: password,
         };
@@ -61,8 +61,10 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
         };
         result = await login(credentials).unwrap();
         if (!isLoginError) {
-          localStorage.setItem('token', result.token);
+          localStorage.setItem('token', result.access);
           setSpinnerLoad(true);
+          console.log(result.access);
+          
           dispatch(userSlice.actions.login(result.user));
           setIsAuthenticated(true);
         }
