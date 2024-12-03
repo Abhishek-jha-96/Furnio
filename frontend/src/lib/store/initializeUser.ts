@@ -19,13 +19,7 @@ export const userSlice = createSlice({
   reducers: {
     // Log in a user (sets their data)
     login: (state, action: PayloadAction<UserProps>) => {
-      const {
-        id,
-        name,
-        email,
-        email_verified,
-        isActive,
-      } = action.payload;
+      const { id, name, email, email_verified, isActive } = action.payload;
       state.id = id;
       state.name = name;
       state.email = email;

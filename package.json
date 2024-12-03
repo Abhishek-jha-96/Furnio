@@ -7,7 +7,7 @@
     "frontend"
   ],
   "scripts": {
-    "format": "prettier --ignore-path .prettierignore \"{frontend}/**/*.{ts,tsx,js,json}\"",
+    "format": "prettier --ignore-path .prettierignore \"frontend/**/*.{ts,tsx,js,json}\"",
     "format:check": "npm run format -- --check",
     "format:write": "npm run format -- --write",
     "validate": "npm run format:write",

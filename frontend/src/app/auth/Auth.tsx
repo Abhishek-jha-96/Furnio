@@ -64,7 +64,7 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
           localStorage.setItem('token', result.access);
           setSpinnerLoad(true);
           console.log(result.access);
-          
+
           dispatch(userSlice.actions.login(result.user));
           setIsAuthenticated(true);
         }
