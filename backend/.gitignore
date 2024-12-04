@@ -164,5 +164,5 @@ cython_debug/
 .envs/dev/*
 .envs/prod/*
 .envs/test/*
-
+.encryption_keys/*
 *.pem
