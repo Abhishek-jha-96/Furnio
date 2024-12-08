@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { SignUpProps } from '@/lib/login';
-import {
-  useLoginMutation,
-  useSignUpMutation,
-} from '@/lib/store/service/loginQuery';
 import { AlertDestructive } from '@/components/login/Alert';
 import Spinner from '@/components/login/Spinner';
 import { AuthForm } from './AuthForm';
 import { useRouter } from 'next/navigation';
-import { userSlice } from '@/lib/store/initializeUser';
 import { useAppDispatch } from '@/lib/store/hooks';
+import { useLoginMutation, useSignUpMutation } from '@/lib/api/authApi';
+import { login, setUserData } from '@/lib/store/slices/userSlice';  // Import updated actions
+import { useFetchUserQuery } from '@/lib/api/userApi';
 
 export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   const dispatch = useAppDispatch();
@@ -24,50 +22,42 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   const [showSignupError, setShowSignupError] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const router = useRouter();
+
+  // Mutations for login and sign-up
   const [
-    login,
+    loginMutation,
     { isLoading: isLoginLoading, isError: isLoginError, error: loginError },
   ] = useLoginMutation();
   const [
-    signUp,
+    signUpMutation,
     { isLoading: isSignupLoading, isError: isSignupError, error: signupError },
   ] = useSignUpMutation();
+
+  // Fetch user data if authenticated
+  const { data: userData, error: userFetchError, isLoading: userLoading } = useFetchUserQuery(undefined, {
+    skip: !isAuthenticated,
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      let result;
       if (isSignUp) {
-        // Call the sign-up mutation
         if (password !== confirmPassword) {
-          setPasswordMismatchError(true); // Set the password mismatch error state
+          setPasswordMismatchError(true);
           return;
         }
-        const credentials = {
-          name: name,
-          email: email,
-          password: password,
-        };
-        result = await signUp(credentials).unwrap();
-        if (!isSignupError) {
-          setSpinnerLoad(true);
-          setIsAuthenticated(true);
-        }
+        const credentials = { name, email, password };
+        await signUpMutation(credentials).unwrap();
+        setIsAuthenticated(true);
       } else {
-        // Call the login mutation
-        const credentials = {
-          email: email,
-          password: password,
-        };
-        result = await login(credentials).unwrap();
-        if (!isLoginError) {
-          localStorage.setItem('token', result.access);
-          setSpinnerLoad(true);
-          console.log(result.access);
+        const credentials = { email, password };
+        const result = await loginMutation(credentials).unwrap();
 
-          dispatch(userSlice.actions.login(result.user));
-          setIsAuthenticated(true);
-        }
+        // Save tokens in localStorage
+        localStorage.setItem('token', result.access);
+        localStorage.setItem('refresh_token', result.refresh);
+
+        setIsAuthenticated(true);
       }
     } catch (err) {
       console.error('Failed to authenticate:', err);
@@ -75,8 +65,17 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   };
 
   useEffect(() => {
+    // When user data is fetched successfully, update the Redux store
+    if (userData) {
+      dispatch(login({ token: { access: localStorage.getItem('token'), refresh: localStorage.getItem('refresh_token') } }));
+      dispatch(setUserData(userData));  // Dispatch to set user data
+      setIsAuthenticated(true);
+    }
+  }, [userData, dispatch]);
+
+  useEffect(() => {
     if (isAuthenticated) {
-      router.push('/');
+      router.push('/');  // Redirect to the dashboard or home page
     }
   }, [isAuthenticated, router]);
 

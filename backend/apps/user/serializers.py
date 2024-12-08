@@ -35,20 +35,6 @@ class TokenObtainPairSerializer(serializers.Serializer):
         return data
 
 
-class UserListSerializer(ModelSerializer):
-    """
-    serializer to list users
-    """
-
-    class Meta:
-        model = User
-        fields = (
-            "id",
-            "name",
-            "email",
-        )
-
-
 class UserSerializer(ModelSerializer):
     """
     Serializer for Role Model
@@ -69,6 +55,5 @@ class UserSerializer(ModelSerializer):
         return user
 
     def to_representation(self, instance):
-        rep = super().to_representation(instance)
-        rep.update(instance.to_representation())
+        rep = instance.to_representation()
         return rep

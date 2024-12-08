@@ -1,9 +1,11 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { baseQueryWithReauth } from './baseQuery';
 
-// Define a service using a base URL and expected endpoints
-export const loginApi = createApi({
-  reducerPath: 'loginAPI',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000' }),
+const apiUrl = 'http://localhost:8000';
+
+export const authApi = createApi({
+  reducerPath: 'authApi',
+  baseQuery: baseQueryWithReauth(apiUrl),
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
@@ -22,4 +24,4 @@ export const loginApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useSignUpMutation } = loginApi;
+export const { useLoginMutation, useSignUpMutation } = authApi;
