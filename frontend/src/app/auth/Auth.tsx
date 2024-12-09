@@ -4,10 +4,6 @@ import { AlertDestructive } from '@/components/login/Alert';
 import Spinner from '@/components/login/Spinner';
 import { AuthForm } from './AuthForm';
 import { useRouter } from 'next/navigation';
-import { useAppDispatch } from '@/lib/store/hooks';
-import { useLoginMutation, useSignUpMutation } from '@/lib/api/authApi';
-import { login, setUserData } from '@/lib/store/slices/userSlice';  // Import updated actions
-import { useFetchUserQuery } from '@/lib/api/userApi';
 
 export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   const dispatch = useAppDispatch();
@@ -34,7 +30,11 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   ] = useSignUpMutation();
 
   // Fetch user data if authenticated
-  const { data: userData, error: userFetchError, isLoading: userLoading } = useFetchUserQuery(undefined, {
+  const {
+    data: userData,
+    error: userFetchError,
+    isLoading: userLoading,
+  } = useFetchUserQuery(undefined, {
     skip: !isAuthenticated,
   });
 
@@ -67,15 +67,22 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   useEffect(() => {
     // When user data is fetched successfully, update the Redux store
     if (userData) {
-      dispatch(login({ token: { access: localStorage.getItem('token'), refresh: localStorage.getItem('refresh_token') } }));
-      dispatch(setUserData(userData));  // Dispatch to set user data
+      dispatch(
+        login({
+          token: {
+            access: localStorage.getItem('token'),
+            refresh: localStorage.getItem('refresh_token'),
+          },
+        }),
+      );
+      dispatch(setUserData(userData)); // Dispatch to set user data
       setIsAuthenticated(true);
     }
   }, [userData, dispatch]);
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push('/');  // Redirect to the dashboard or home page
+      router.push('/'); // Redirect to the dashboard or home page
     }
   }, [isAuthenticated, router]);
 
