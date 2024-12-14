@@ -1,10 +1,3 @@
-from enum import Enum
-
-
-class PermissionActionName(Enum):
-    ALL_OBJECTS = "all objects"
-
-
 """
 Constants for custom_exception_handler start
 """

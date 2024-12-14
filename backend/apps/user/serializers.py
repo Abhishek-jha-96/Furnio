@@ -5,7 +5,6 @@ from rest_framework.serializers import ModelSerializer
 from django.core.validators import validate_email
 from apps.user.models import User
 from apps.user.utils import get_tokens_for_user
-
 from apps.user.constants import (
     USER_DOES_NOT_EXIST,
     NO_ACTIVE_ACCOUNT_FOUND,

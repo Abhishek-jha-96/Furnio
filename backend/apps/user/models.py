@@ -5,7 +5,6 @@ from django.db import models
 from apps.user.settings import (
     DEFAULT_NAME_FIELD_MAX_LENGTH,
 )
-
 from apps.user.constants import (
     FIRST_NAME_USER_HELP_TEXT,
     EMAIL_HELP_TEXT,
