@@ -1,8 +1,5 @@
 services:
 
-
-
-
   postgres:
     image: postgres:latest
     container_name: backend_postgres
@@ -10,9 +7,6 @@ services:
       - .envs/test/db.env
     volumes:
       - backend_postgres_volume:/var/lib/postgresql/data/
-
-
-
 
   server:
     build:
@@ -26,24 +20,9 @@ services:
       - .envs/test/db.env
     volumes:
       - ./:/code
-    restart: always
-  
+    restart: always  
     depends_on:
-    
       - postgres
-    
-    
-    
-  
 
-
-
-
-
-
-volumes:
-  
+volumes:  
   backend_postgres_volume:
-  
-  
-
