@@ -8,15 +8,7 @@ djangorestframework-simplejwt[crypto]==5.3.1
 drf-spectacular==0.27.2
 drf-yasg==1.21.7
 
-
 psycopg2-binary==2.9.9
-
-
-
-
-
-
-
 
 # AWS
 boto3==1.35.49
