@@ -11,12 +11,10 @@ export interface SignUpProps {
 // Represents the user's state in the application
 export interface UserProps {
   id: Number;
-  first_name: string;
-  last_name: string;
+  name: string;
   email: string;
+  email_verified: boolean;
   isActive: boolean;
-  createdAt?: string | null; // Optional timestamp for when the user was created
-  updatedAt?: string | null; // Optional timestamp for when the user data was last updated
 }
 
 interface Status {
@@ -28,7 +26,6 @@ interface Status {
 export interface UserData {
   id: number;
   firstName: string;
-  lastName: string;
   email: string;
   status: Status;
   createdAt?: string | null;

@@ -1,0 +1,28 @@
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: backend_postgres
+    env_file:
+      - .envs/prod/db.env
+    volumes:
+      - backend_postgres_volume:/var/lib/postgresql/data/
+
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        ENVIRONMENT: prod
+    container_name: backend_api
+    env_file:
+      - .envs/prod/api.env
+      - .envs/prod/db.env
+    volumes:
+      - ./:/code
+    restart: always  
+    depends_on:
+      - postgres
+
+volumes:  
+  backend_postgres_volume:

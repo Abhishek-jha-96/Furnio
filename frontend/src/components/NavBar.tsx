@@ -4,8 +4,6 @@ import main_logo from '../../public/furniro_assets/Meubel House_Logos-05.png';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Heart, Search, ShoppingCartIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/lib/store/store';
 import { Button } from '@/components/ui/button';
 
 const MenuProps = [
@@ -28,7 +26,11 @@ const MenuProps = [
 ];
 
 export default function NavBar() {
-  const userData = useSelector((state: RootState) => state.user);
+  const userData = {
+    id: 0,
+    first_name: 'John',
+    last_name: 'Doe',
+  };
   console.log(userData);
   return (
     <div className="w-full flex items-center justify-between py-4 px-2 md:px-16">
