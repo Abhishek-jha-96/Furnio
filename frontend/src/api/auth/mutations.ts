@@ -1,10 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
-import { login, LoginVariables, signup } from "./api";
+import { useMutation } from '@tanstack/react-query';
+import { login, LoginVariables, signup } from './api';
 
 // Mutation for login
 export const useLoginMutation = (
   onSuccess: () => void,
-  onError: (error: unknown) => void
+  onError: (error: unknown) => void,
 ) =>
   useMutation<
     any, // Replace `any` with the actual data type returned by the API (e.g., AuthResponse)
@@ -19,7 +19,7 @@ export const useLoginMutation = (
 // Mutation for signup
 export const useSignupMutation = (
   onSuccess: () => void,
-  onError: (error: unknown) => void
+  onError: (error: unknown) => void,
 ) =>
   useMutation<
     any, // Replace `any` with the actual data type returned by the API

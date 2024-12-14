@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { SignUpProps } from "@/lib/login";
-import { AlertDestructive } from "@/components/login/Alert";
-import Spinner from "@/components/login/Spinner";
-import { AuthForm } from "./AuthForm";
-import { useRouter } from "next/navigation";
-import { useLoginMutation, useSignupMutation } from "@/api/auth/mutations";
+import React, { useEffect, useState } from 'react';
+import { SignUpProps } from '@/lib/login';
+import { AlertDestructive } from '@/components/login/Alert';
+import Spinner from '@/components/login/Spinner';
+import { AuthForm } from './AuthForm';
+import { useRouter } from 'next/navigation';
+import { useLoginMutation, useSignupMutation } from '@/api/auth/mutations';
 
 export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [name, setName] = useState<string>('');
   const [passwordMismatchError, setPasswordMismatchError] =
     useState<boolean>(false);
   const [spinnerload, setSpinnerLoad] = useState<boolean>(false);
@@ -21,21 +21,21 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
   const loginMutation = useLoginMutation(
     () => {
       setSpinnerLoad(false);
-      router.push("/");
+      router.push('/');
     },
     () => {
       setSpinnerLoad(false);
-    }
+    },
   );
 
   const signupMutation = useSignupMutation(
     () => {
       setSpinnerLoad(false);
-      router.push("/");
+      router.push('/');
     },
     () => {
       setSpinnerLoad(false);
-    }
+    },
   );
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -65,7 +65,9 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
 
   return (
     <main className="w-full h-screen bg-[#fffefb] flex justify-center items-center overflow-hidden">
-      {passwordMismatchError && <AlertDestructive error="Passwords do not match" />}
+      {passwordMismatchError && (
+        <AlertDestructive error="Passwords do not match" />
+      )}
       {spinnerload && <Spinner />}
       {signupMutation.isError && <AlertDestructive error="Signup failed" />}
       {loginMutation.isError && <AlertDestructive error="Login failed" />}

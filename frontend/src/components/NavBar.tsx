@@ -27,9 +27,9 @@ const MenuProps = [
 
 export default function NavBar() {
   const userData = {
-    "id": 0,
-    "first_name": "John",
-    "last_name": "Doe",
+    id: 0,
+    first_name: 'John',
+    last_name: 'Doe',
   };
   console.log(userData);
   return (
