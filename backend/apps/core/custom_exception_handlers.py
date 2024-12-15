@@ -1,7 +1,7 @@
 from rest_framework.serializers import ValidationError
 from django.http import Http404
 from rest_framework import status
-from rest_framework.exceptions import APIException, Throttled
+from rest_framework.exceptions import APIException, Throttled, AuthenticationFailed, NotAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import set_rollback
 from rest_framework.status import (
@@ -11,7 +11,8 @@ from rest_framework.status import (
     HTTP_404_NOT_FOUND,
     HTTP_204_NO_CONTENT,
     HTTP_201_CREATED,
-    HTTP_403_FORBIDDEN
+    HTTP_403_FORBIDDEN,
+    HTTP_401_UNAUTHORIZED
 )
 from apps.core.constants import (
     THROTTLE_EXEC_DETAILS,
@@ -33,7 +34,8 @@ def get_response(
         permission_denied: bool = False,
         missing_resource: bool = False,
         bad_request: bool = False,
-        server_error: bool = False
+        server_error: bool = False,
+        unauthorized: bool = False,
 ):
     status_code: status = None
     if not error_list:
@@ -44,6 +46,8 @@ def get_response(
         status_code = HTTP_200_OK
     elif resource_created:
         status_code = HTTP_201_CREATED
+    elif unauthorized:
+        status_code = HTTP_401_UNAUTHORIZED
     elif permission_denied:
         status_code = HTTP_403_FORBIDDEN
     elif missing_resource:
@@ -57,9 +61,10 @@ def get_response(
         'data': data,
         'message': message,
         'error_list': error_list,
-        }
+    }
 
     return Response(status=status_code, headers=headers, data=response_data)
+
 
 
 class APIException(APIException):
@@ -76,13 +81,21 @@ def custom_exception_handler(exc, context):
     print("➡ exc :", exc)
     print("➡ context :", context)
 
+    # Initialize response flags
     not_found: bool = False
     server_error: bool = False
     bad_request: bool = False
+    unauthorized: bool = False
 
-    if isinstance(exc, Throttled):
-        exc.detail = THROTTLE_EXEC_DETAILS % exc.wait
+    # Handle authentication errors explicitly
+    if isinstance(exc, (AuthenticationFailed, NotAuthenticated)):
+        unauthorized = True
 
+    # Handle throttling
+    elif isinstance(exc, Throttled):
+        exc.detail = f"Request was throttled. Try again in {exc.wait} seconds."
+
+    # Handle generic API exceptions
     elif isinstance(exc, APIException):
         headers = {}
         if getattr(exc, "auth_header", None):
@@ -91,24 +104,21 @@ def custom_exception_handler(exc, context):
             headers["Retry-After"] = "%d" % exc.wait
         set_rollback()
 
+    # Handle 404 errors
     elif isinstance(exc, Http404):
-        if not hasattr(exc, 'default_detail'):
-            exc.default_detail = NOT_FOUND_EXEC_DETAILS
         not_found = True
 
+    # Handle validation errors
     elif isinstance(exc, ValidationError):
-        if not hasattr(exc, 'default_detail'):
-            exc.default_detail = VALIDATION_EXEC_DETAILS
         bad_request = True
 
+    # Handle generic server errors
     elif isinstance(exc, Exception):
-        if not hasattr(exc, 'default_detail'):
-            exc.default_detail = INTERNAL_ERROR_EXEC_DETAILS
         if not hasattr(exc, "status_code"):
             server_error = True
-    else:
-        server_error = True
+        set_rollback()
 
+    # Extract error messages
     error_list = []
     try:
         error_details = exc.get_full_details()
@@ -127,13 +137,14 @@ def custom_exception_handler(exc, context):
         else:
             for error_item in error_details:
                 error_list.append(error_item["message"])
-
     except Exception:
         error_list.append(str(exc))
 
+    # Return the response using the custom get_response function
     return get_response(
         error_list=error_list,
+        unauthorized=unauthorized,
         missing_resource=not_found,
         server_error=server_error,
-        bad_request=bad_request
+        bad_request=bad_request,
     )

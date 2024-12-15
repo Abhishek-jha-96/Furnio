@@ -8,28 +8,10 @@ export interface SignUpProps {
   toggleSignUp: () => void;
 }
 
-// Represents the user's state in the application
-export interface UserProps {
-  id: Number;
-  name: string;
-  email: string;
-  email_verified: boolean;
-  isActive: boolean;
-}
-
 interface Status {
   id: number;
   name: string;
   __entity: string;
-}
-
-export interface UserData {
-  id: number;
-  firstName: string;
-  email: string;
-  status: Status;
-  createdAt?: string | null;
-  updatedAt?: string | null;
 }
 
 // Represents the login input form

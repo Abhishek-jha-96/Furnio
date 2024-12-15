@@ -70,7 +70,7 @@ class User(AbstractUser):
             "id": self.id,
             "name": self.name,
             "email": self.email,
-            "verified": self.email_verified,
+            "email_verified": self.email_verified,
             "is_active": self.is_active,
             "is_staff": self.is_staff,
             "is_superuser": self.is_superuser,
