@@ -1,14 +1,13 @@
-import { create } from "zustand";
-import { queryClient } from "@/context/QueryProvider";
-import { UserData, UserState } from "@/api/user/constants";
-
+import { create } from 'zustand';
+import { queryClient } from '@/context/QueryProvider';
+import { UserData, UserState } from '@/api/user/constants';
 
 const useUserStore = create<UserState>((set) => ({
   name: null,
   email: null,
   email_verified: null,
   is_active: null,
-  
+
   // set user data in the state
   setUserData: (data: UserData) => {
     set({

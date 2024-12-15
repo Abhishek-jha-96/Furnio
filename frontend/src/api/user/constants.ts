@@ -13,7 +13,7 @@ export type UserData = {
 
 // Represents the structure of the API response
 export type UserResponse = {
-  data: UserData[];  // Array of users
+  data: UserData[]; // Array of users
   message: string | null;
   error_list: string[];
 };
@@ -24,6 +24,6 @@ export type UserState = {
   email: string | null;
   email_verified: boolean | null;
   is_active: boolean | null;
-  setUserData: (data: UserData) => void;  // This should accept a single `UserData` object
+  setUserData: (data: UserData) => void; // This should accept a single `UserData` object
   clearUserData: () => void;
 };
