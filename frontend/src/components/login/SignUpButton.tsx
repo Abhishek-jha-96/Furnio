@@ -1,6 +1,6 @@
 'use client';
 
-import { LoginProps } from '@/lib/login';
+import { LoginProps } from '@/lib/props';
 import React, { useState } from 'react';
 
 const SignUpButton = ({ onClick, children }: LoginProps) => {

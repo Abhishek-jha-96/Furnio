@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { SignUpProps } from '@/lib/login';
+import { SignUpProps } from '@/lib/props';
 import { AlertDestructive } from '@/components/login/Alert';
 import Spinner from '@/components/login/Spinner';
 import { AuthForm } from './AuthForm';
@@ -50,7 +50,18 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
       }
       signupMutation.mutate({ name, email, password });
     } else {
-      loginMutation.mutate({ email, password });
+      loginMutation.mutate(
+        { email, password },
+        {
+          onSuccess: (data) => {
+            localStorage.setItem('accessToken', data.access);
+            console.log('Logged in successfully');
+          },
+          onError: (error) => {
+            console.error('Login failed:', error);
+          },
+        },
+      );
     }
   };
 
@@ -62,6 +73,8 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
       return () => clearTimeout(timer);
     }
   }, [passwordMismatchError]);
+
+  // need to handle the time for error tost!!
 
   return (
     <main className="w-full h-screen bg-[#fffefb] flex justify-center items-center overflow-hidden">

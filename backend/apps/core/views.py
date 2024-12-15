@@ -1,4 +1,4 @@
-from rest_framework.filters import OrderingFilter, SearchFilter
+from rest_framework.filters import OrderingFilter
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import (
     ListModelMixin,
@@ -12,9 +12,7 @@ from apps.core.custom_exception_handlers import get_response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-
 class BaseListModelMixin(ListModelMixin):
-
     def list(self, request, *args, **kwargs):
         response = super().list(request, *args, **kwargs)
         return get_response(data=response.data, success=True)

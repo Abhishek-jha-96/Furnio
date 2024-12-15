@@ -1,4 +1,6 @@
 from os.path import join
+
+from apps.product.settings import PRODUCT_APP
 from .configurations.common_settings import BASE_DIR
 from .configurations.env_helpers import get_env_var, get_bool_env_var, get_list_env_var, get_int_env_var
 from .configurations.logger_settings import LOGGING
@@ -36,6 +38,7 @@ THIRD_PARTY_APPS = [
 
 PROJECT_APPS = [
     "apps.user",
+    PRODUCT_APP,
 ]
 
 INSTALLED_APPS = CORE_APPS + PROJECT_APPS + THIRD_PARTY_APPS
