@@ -20,7 +20,7 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
     },
     () => {
       setSpinnerLoad(false);
-    }
+    },
   );
 
   const signupMutation = useSignupMutation(
@@ -30,7 +30,7 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
     },
     () => {
       setSpinnerLoad(false);
-    }
+    },
   );
 
   const handleFormSubmit = (data: credentialsProps) => {
@@ -53,7 +53,7 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
           onSuccess: (data) => {
             localStorage.setItem('accessToken', data.access);
           },
-        }
+        },
       );
     }
   };

@@ -1,4 +1,4 @@
-import { SubmitHandler } from "react-hook-form";
+import { SubmitHandler } from 'react-hook-form';
 
 export const variants = {
   left: { x: 0 },
@@ -14,7 +14,12 @@ export const textVariants = {
 export interface AuthFormProps {
   isSignUp: boolean;
   toggleSignUp: () => void;
-  onSubmit: SubmitHandler<{name?: string; email: string; password: string; confirmPassword?: string}>;
+  onSubmit: SubmitHandler<{
+    name?: string;
+    email: string;
+    password: string;
+    confirmPassword?: string;
+  }>;
 }
 
 export interface credentialsProps {

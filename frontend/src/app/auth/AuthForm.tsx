@@ -13,10 +13,19 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { AuthFormProps, credentialsProps, textVariants, variants } from './constants';
+import {
+  AuthFormProps,
+  credentialsProps,
+  textVariants,
+  variants,
+} from './constants';
 import SignUpButton from '@/components/login/SignUpButton';
 
-export const AuthForm = ({ isSignUp, toggleSignUp, onSubmit }: AuthFormProps) => {
+export const AuthForm = ({
+  isSignUp,
+  toggleSignUp,
+  onSubmit,
+}: AuthFormProps) => {
   const {
     register,
     handleSubmit,
@@ -57,7 +66,9 @@ export const AuthForm = ({ isSignUp, toggleSignUp, onSubmit }: AuthFormProps) =>
                   placeholder="name"
                   {...register('name', { required: isSignUp })}
                 />
-                {errors.name && <span className="text-red-500">Name is required</span>}
+                {errors.name && (
+                  <span className="text-red-500">Name is required</span>
+                )}
               </div>
             )}
             <div className="pb-2">
@@ -68,7 +79,9 @@ export const AuthForm = ({ isSignUp, toggleSignUp, onSubmit }: AuthFormProps) =>
                 type="email"
                 {...register('email', { required: true })}
               />
-              {errors.email && <span className="text-red-500">Email is required</span>}
+              {errors.email && (
+                <span className="text-red-500">Email is required</span>
+              )}
             </div>
             <div className="pb-2">
               <Label htmlFor="password">Password</Label>
@@ -78,7 +91,9 @@ export const AuthForm = ({ isSignUp, toggleSignUp, onSubmit }: AuthFormProps) =>
                 placeholder="password"
                 {...register('password', { required: true })}
               />
-              {errors.password && <span className="text-red-500">Password is required</span>}
+              {errors.password && (
+                <span className="text-red-500">Password is required</span>
+              )}
             </div>
             {isSignUp && (
               <div className="pb-2">
@@ -89,7 +104,11 @@ export const AuthForm = ({ isSignUp, toggleSignUp, onSubmit }: AuthFormProps) =>
                   placeholder="confirm password"
                   {...register('confirmPassword', { required: isSignUp })}
                 />
-                {errors.confirmPassword && <span className="text-red-500">Confirm Password is required</span>}
+                {errors.confirmPassword && (
+                  <span className="text-red-500">
+                    Confirm Password is required
+                  </span>
+                )}
               </div>
             )}
           </CardContent>
@@ -107,7 +126,9 @@ export const AuthForm = ({ isSignUp, toggleSignUp, onSubmit }: AuthFormProps) =>
                   variants={textVariants}
                   transition={{ duration: 0.3 }}
                 >
-                  {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
+                  {isSignUp
+                    ? 'Already have an account? '
+                    : "Don't have an account? "}
                   <SignUpButton onClick={handleToggle}>
                     {isSignUp ? 'Sign In' : 'Sign Up'}
                   </SignUpButton>
