@@ -7,42 +7,31 @@ import {
 } from '@/components/ui/card';
 import ImageSec from './ImageSec';
 import main_logo from '../../../public/furniro_assets/Meubel House_Logos-05.png';
-import { useState } from 'react';
 import Image from 'next/legacy/image';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { AnimatePresence, motion } from 'framer-motion';
-import { AuthFormProps, textVariants, variants } from './constants';
+import { useForm } from 'react-hook-form';
+import { AuthFormProps, credentialsProps, textVariants, variants } from './constants';
 import SignUpButton from '@/components/login/SignUpButton';
 
-export const AuthForm = ({
-  isSignUp,
-  name,
-  email,
-  password,
-  confirmPassword,
-  toggleSignUp,
-  handleSubmit,
-  setName,
-  setEmail,
-  setPassword,
-  setConfirmPassword,
-}: AuthFormProps) => {
-  const [isImageLeft, setIsImageLeft] = useState(true);
+export const AuthForm = ({ isSignUp, toggleSignUp, onSubmit }: AuthFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<credentialsProps>();
 
-  const handleToggle = () => {
-    setIsImageLeft(!isImageLeft);
-    toggleSignUp();
-  };
+  const handleToggle = () => toggleSignUp();
 
   return (
     <Card className="w-[65%] h-fit flex rounded-none justify-between relative overflow-hidden">
-      <ImageSec isImageLeft={isImageLeft} />
+      <ImageSec isImageLeft={isSignUp} />
       <motion.div
         className="bg-white px-4 w-[38%] z-10"
         initial={{ x: '160%' }}
-        animate={isImageLeft ? 'right' : 'left'}
+        animate={isSignUp ? 'right' : 'left'}
         variants={variants}
         transition={{ duration: 0.5 }}
       >
@@ -58,61 +47,54 @@ export const AuthForm = ({
             {isSignUp ? 'Sign Up' : 'Login'}
           </CardTitle>
         </CardHeader>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <CardContent>
-            <div>
-              {isSignUp && (
-                <div className="pb-2">
-                  <Label htmlFor="confirmPassword">Name</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-              )}
+            {isSignUp && (
               <div className="pb-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="name">Name</Label>
                 <Input
-                  id="email"
-                  placeholder="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+                  id="name"
+                  placeholder="name"
+                  {...register('name', { required: isSignUp })}
                 />
+                {errors.name && <span className="text-red-500">Name is required</span>}
               </div>
-              <div className="pb-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="password"
-                />
-              </div>
-              {isSignUp && (
-                <div className="pb-2">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
-                  <Input
-                    id="confirmPassword"
-                    type="password"
-                    placeholder="confirm password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
-                </div>
-              )}
+            )}
+            <div className="pb-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                placeholder="email"
+                type="email"
+                {...register('email', { required: true })}
+              />
+              {errors.email && <span className="text-red-500">Email is required</span>}
             </div>
+            <div className="pb-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="password"
+                {...register('password', { required: true })}
+              />
+              {errors.password && <span className="text-red-500">Password is required</span>}
+            </div>
+            {isSignUp && (
+              <div className="pb-2">
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="confirm password"
+                  {...register('confirmPassword', { required: isSignUp })}
+                />
+                {errors.confirmPassword && <span className="text-red-500">Confirm Password is required</span>}
+              </div>
+            )}
           </CardContent>
           <CardFooter className="flex flex-col justify-center gap-3">
-            <Button type={'submit'} className="w-full">
+            <Button type="submit" className="w-full">
               {isSignUp ? 'Sign Up' : 'Login'}
             </Button>
             <div className="text-gray-600 h-[50px]">
@@ -124,11 +106,8 @@ export const AuthForm = ({
                   exit="exit"
                   variants={textVariants}
                   transition={{ duration: 0.3 }}
-                  className=""
                 >
-                  {isSignUp
-                    ? 'Already have an account? '
-                    : "Don't have an account? "}
+                  {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
                   <SignUpButton onClick={handleToggle}>
                     {isSignUp ? 'Sign In' : 'Sign Up'}
                   </SignUpButton>

@@ -1,20 +1,15 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SignUpProps } from '@/lib/props';
 import { AlertDestructive } from '@/components/login/Alert';
 import Spinner from '@/components/login/Spinner';
 import { AuthForm } from './AuthForm';
 import { useRouter } from 'next/navigation';
 import { useLoginMutation, useSignupMutation } from '@/api/auth/mutations';
+import { credentialsProps } from './constants';
 
 export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [passwordMismatchError, setPasswordMismatchError] =
-    useState<boolean>(false);
   const [spinnerload, setSpinnerLoad] = useState<boolean>(false);
   const router = useRouter();
 
@@ -25,7 +20,7 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
     },
     () => {
       setSpinnerLoad(false);
-    },
+    }
   );
 
   const signupMutation = useSignupMutation(
@@ -35,69 +30,43 @@ export default function Auth({ isSignUp, toggleSignUp }: SignUpProps) {
     },
     () => {
       setSpinnerLoad(false);
-    },
+    }
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleFormSubmit = (data: credentialsProps) => {
     setSpinnerLoad(true);
 
     if (isSignUp) {
-      if (password !== confirmPassword) {
-        setPasswordMismatchError(true);
+      if (data.password !== data.confirmPassword) {
         setSpinnerLoad(false);
         return;
       }
-      signupMutation.mutate({ name, email, password });
+      signupMutation.mutate({
+        name: data.name!,
+        email: data.email,
+        password: data.password,
+      });
     } else {
       loginMutation.mutate(
-        { email, password },
+        { email: data.email, password: data.password },
         {
           onSuccess: (data) => {
             localStorage.setItem('accessToken', data.access);
-            console.log('Logged in successfully');
           },
-          onError: (error) => {
-            console.error('Login failed:', error);
-          },
-        },
+        }
       );
     }
   };
 
-  useEffect(() => {
-    if (passwordMismatchError) {
-      const timer = setTimeout(() => {
-        setPasswordMismatchError(false);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [passwordMismatchError]);
-
-  // need to handle the time for error tost!!
-
   return (
     <main className="w-full h-screen bg-[#fffefb] flex justify-center items-center overflow-hidden">
-      {passwordMismatchError && (
-        <AlertDestructive error="Passwords do not match" />
-      )}
       {spinnerload && <Spinner />}
       {signupMutation.isError && <AlertDestructive error="Signup failed" />}
       {loginMutation.isError && <AlertDestructive error="Login failed" />}
       <AuthForm
         isSignUp={isSignUp}
         toggleSignUp={toggleSignUp}
-        {...{
-          name,
-          email,
-          password,
-          confirmPassword,
-          handleSubmit,
-          setName,
-          setEmail,
-          setPassword,
-          setConfirmPassword,
-        }}
+        onSubmit={handleFormSubmit}
       />
     </main>
   );
