@@ -16,7 +16,7 @@ AWS_DEFAULT_ACL = None
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
 AWS_S3_FILE_KEY_PREFIX: str = "media/project_files/"
 
-STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
+STATIC_URL = "/static/"
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
