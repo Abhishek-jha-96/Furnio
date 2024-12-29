@@ -7,7 +7,6 @@ from rest_framework.mixins import (
     UpdateModelMixin,
     DestroyModelMixin
 )
-from apps.core.pagination import ListPagination
 from apps.core.custom_exception_handlers import get_response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated

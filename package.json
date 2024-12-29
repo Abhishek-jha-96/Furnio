@@ -12,7 +12,10 @@
     "format:write": "npm run format -- --write",
     "validate": "npm run format:write",
     "lint": "npm run lint --workspaces",
-    "prepare": "husky"
+    "prepare": "husky",
+    "py_format:check": "black --check backend/",
+    "py_format:write": "black backend/",
+    "py_validate": "npm run py_format:write"
   },
   "author": "Abhishek",
   "license": "ISC",

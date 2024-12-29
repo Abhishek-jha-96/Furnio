@@ -30,7 +30,6 @@ export default function NavBar() {
         console.log(error);
       }
     }
-    console.log(userData);
   }, [userData, setUserData]);
 
   return (

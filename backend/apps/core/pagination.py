@@ -1,8 +1,7 @@
 from rest_framework.pagination import PageNumberPagination
 from collections import OrderedDict
-from apps.core.custom_exception_handlers import get_response
 from apps.core.settings import PAGE_SIZE, MAX_PAGE_SIZE
-
+from rest_framework.response import Response
 
 class ListPagination(PageNumberPagination):
     page_size = PAGE_SIZE
@@ -10,7 +9,7 @@ class ListPagination(PageNumberPagination):
     page_size_query_param = "page_size"
 
     def get_paginated_response(self, data):
-        return get_response(
+        return Response(
             OrderedDict(
                 [
                     ("count", self.page.paginator.count),
@@ -19,5 +18,4 @@ class ListPagination(PageNumberPagination):
                     ("results", data),
                 ]
             ),
-            success=True
         )

@@ -1,18 +1,48 @@
+'use client';
+import { useProductQuery } from '@/api/product/queries';
 import ProductCard from './ProductCard';
+import { useEffect } from 'react';
+import useproductStore from '@/store/productStore';
 
 export default function Products() {
+  const { data: productData, isLoading, isError } = useProductQuery();
+  const { setProductData, products } = useproductStore();
+
+  useEffect(() => {
+    if (!isError && !isLoading && productData) {
+      try {
+        setProductData(productData.data.results || []);
+      } catch (error) {
+        console.error('Error setting product data:', error);
+      }
+    }
+  }, [productData, setProductData, isError, isLoading]);
+
+  if (isLoading) return <p>Loading products...</p>;
+  if (isError) return <p>Error loading products.</p>;
+
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold">Our Products</h1>
       <div className="container mx-auto py-7">
-        <ProductCard
-          imageUrl="/furniro_assets/bedroom1.png"
-          productName="Product Name"
-          productCategory="Product Category"
-          currentPrice={100}
-          originalPrice={150}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+          {products.length > 0 ? (
+            products.map((product, index) => (
+              <ProductCard
+                key={index}
+                imageUrl="/furniro_assets/bedroom1.png"
+                productName={product.name}
+                productCategory={product.category}
+                currentPrice={product.price - product.price * 0.2}
+                originalPrice={product.price}
+              />
+            ))
+          ) : (
+            <p>No products available.</p>
+          )}
+        </div>
       </div>
+
       <button className="font-medium text-wood border-2 border-wood py-2 px-16">
         Show more
       </button>
