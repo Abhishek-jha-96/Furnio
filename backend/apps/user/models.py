@@ -37,17 +37,15 @@ class User(AbstractUser):
     """
     User details
     """
+
     username = None
     first_name = None
     last_name = None
-    
+
     name = models.CharField(
-        max_length=DEFAULT_NAME_FIELD_MAX_LENGTH,
-        help_text=FIRST_NAME_USER_HELP_TEXT
+        max_length=DEFAULT_NAME_FIELD_MAX_LENGTH, help_text=FIRST_NAME_USER_HELP_TEXT
     )
-    email = models.EmailField(
-        unique=True, help_text=EMAIL_HELP_TEXT
-    )
+    email = models.EmailField(unique=True, help_text=EMAIL_HELP_TEXT)
 
     email_verified = models.BooleanField(default=False, help_text=VERIFIED_HELP_TEXT)
 

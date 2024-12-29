@@ -1,4 +1,3 @@
-
 from .env_helpers import get_env_var, get_int_env_var
 
 POSTGRES_DB = get_env_var("POSTGRES_DB")
@@ -13,11 +12,5 @@ postgres_settings = {
     "USER": POSTGRES_USER,
     "PASSWORD": POSTGRES_PASSWORD,
     "HOST": POSTGRES_HOST,
-    "PORT": POSTGRES_PORT
+    "PORT": POSTGRES_PORT,
 }
-
-
-
-
-
-

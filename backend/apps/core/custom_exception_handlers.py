@@ -1,7 +1,12 @@
 from rest_framework.serializers import ValidationError
 from django.http import Http404
 from rest_framework import status
-from rest_framework.exceptions import APIException, Throttled, AuthenticationFailed, NotAuthenticated
+from rest_framework.exceptions import (
+    APIException,
+    Throttled,
+    AuthenticationFailed,
+    NotAuthenticated,
+)
 from rest_framework.response import Response
 from rest_framework.views import set_rollback
 from rest_framework.status import (
@@ -12,30 +17,30 @@ from rest_framework.status import (
     HTTP_204_NO_CONTENT,
     HTTP_201_CREATED,
     HTTP_403_FORBIDDEN,
-    HTTP_401_UNAUTHORIZED
+    HTTP_401_UNAUTHORIZED,
 )
 from apps.core.constants import (
     THROTTLE_EXEC_DETAILS,
     NOT_FOUND_EXEC_DETAILS,
     VALIDATION_EXEC_DETAILS,
     INTERNAL_ERROR_EXEC_DETAILS,
-    API_EXC_DEFAULT_CODE
+    API_EXC_DEFAULT_CODE,
 )
 
 
 def get_response(
-        data=None,
-        message: str = None,
-        error_list: list = None,
-        headers: dict = None,
-        success: bool = False,
-        no_content: bool = False,
-        resource_created: bool = False,
-        permission_denied: bool = False,
-        missing_resource: bool = False,
-        bad_request: bool = False,
-        server_error: bool = False,
-        unauthorized: bool = False,
+    data=None,
+    message: str = None,
+    error_list: list = None,
+    headers: dict = None,
+    success: bool = False,
+    no_content: bool = False,
+    resource_created: bool = False,
+    permission_denied: bool = False,
+    missing_resource: bool = False,
+    bad_request: bool = False,
+    server_error: bool = False,
+    unauthorized: bool = False,
 ):
     status_code: status = None
     if not error_list:
@@ -58,13 +63,12 @@ def get_response(
         status_code = HTTP_500_INTERNAL_SERVER_ERROR
 
     response_data = {
-        'data': data,
-        'message': message,
-        'error_list': error_list,
+        "data": data,
+        "message": message,
+        "error_list": error_list,
     }
 
     return Response(status=status_code, headers=headers, data=response_data)
-
 
 
 class APIException(APIException):

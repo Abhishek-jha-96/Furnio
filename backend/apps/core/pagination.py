@@ -3,6 +3,7 @@ from collections import OrderedDict
 from apps.core.settings import PAGE_SIZE, MAX_PAGE_SIZE
 from rest_framework.response import Response
 
+
 class ListPagination(PageNumberPagination):
     page_size = PAGE_SIZE
     max_page_size = MAX_PAGE_SIZE

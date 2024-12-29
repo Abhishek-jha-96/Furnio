@@ -7,23 +7,46 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_ts', models.DateTimeField(auto_now_add=True)),
-                ('modified_ts', models.DateTimeField(auto_now=True)),
-                ('name', models.CharField(max_length=100)),
-                ('description', models.TextField()),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('category', models.CharField(choices=[('LIVING_ROOM_FURNITURE', 'Living Room Furniture'), ('BEDROOM_FURNITURE', 'Bedroom Furniture'), ('DINING_ROOM_FURNITURE', 'Dining Room Furniture'), ('KITCHEN_FURNITURE', 'Kitchen Furniture'), ('OFFICE_FURNITURE', 'Office Furniture'), ('OUTDOOR_FURNITURE', 'Outdoor Furniture'), ('CHILDRENS_FURNITURE', "Children's Furniture"), ('STORAGE_FURNITURE', 'Storage Furniture'), ('BATHROOM_FURNITURE', 'Bathroom Furniture'), ('ACCENT_FURNITURE', 'Accent Furniture')])),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_ts", models.DateTimeField(auto_now_add=True)),
+                ("modified_ts", models.DateTimeField(auto_now=True)),
+                ("name", models.CharField(max_length=100)),
+                ("description", models.TextField()),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                (
+                    "category",
+                    models.CharField(
+                        choices=[
+                            ("LIVING_ROOM_FURNITURE", "Living Room Furniture"),
+                            ("BEDROOM_FURNITURE", "Bedroom Furniture"),
+                            ("DINING_ROOM_FURNITURE", "Dining Room Furniture"),
+                            ("KITCHEN_FURNITURE", "Kitchen Furniture"),
+                            ("OFFICE_FURNITURE", "Office Furniture"),
+                            ("OUTDOOR_FURNITURE", "Outdoor Furniture"),
+                            ("CHILDRENS_FURNITURE", "Children's Furniture"),
+                            ("STORAGE_FURNITURE", "Storage Furniture"),
+                            ("BATHROOM_FURNITURE", "Bathroom Furniture"),
+                            ("ACCENT_FURNITURE", "Accent Furniture"),
+                        ]
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

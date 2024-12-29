@@ -6,11 +6,13 @@ from apps.product.models import Product
 from apps.product.serializers import ProductSerializer
 from apps.core.pagination import ListPagination
 
+
 class ProductViewset(BaseViewset):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
     queryset = Product.objects.all()
+
 
 class ProductListViewset(GenericViewSet, BaseListModelMixin):
     serializer_class = ProductSerializer

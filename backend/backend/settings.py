@@ -2,7 +2,12 @@ from os.path import join
 
 from apps.product.settings import PRODUCT_APP
 from .configurations.common_settings import BASE_DIR
-from .configurations.env_helpers import get_env_var, get_bool_env_var, get_list_env_var, get_int_env_var
+from .configurations.env_helpers import (
+    get_env_var,
+    get_bool_env_var,
+    get_list_env_var,
+    get_int_env_var,
+)
 from .configurations.logger_settings import LOGGING
 from .configurations.spectacular_settings import SPECTACULAR_SETTINGS
 from .configurations.rest_framework_settings import REST_FRAMEWORK
@@ -33,7 +38,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "corsheaders",
     "import_export",
-    "drf_spectacular",   
+    "drf_spectacular",
 ]
 
 PROJECT_APPS = [
@@ -90,7 +95,7 @@ Database Settings Start.
 """
 
 DATABASES = {
-    "default": postgres_settings,    
+    "default": postgres_settings,
 }
 
 """ 

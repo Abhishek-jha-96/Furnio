@@ -2,159 +2,151 @@
 
 from django.db import migrations
 
+
 def create_initial_products(apps, schema_editor):
-    Product = apps.get_model('product', 'Product')
+    Product = apps.get_model("product", "Product")
 
     products = [
-    # Living Room Furniture
-    {
-        "name": "Modern Sofa",
-        "description": "A comfortable modern sofa with plush cushions.",
-        "price": 899.99,
-        "category": "LIVING_ROOM_FURNITURE",
-    },
-    {
-        "name": "Wooden Coffee Table",
-        "description": "A stylish wooden coffee table with storage space.",
-        "price": 249.99,
-        "category": "LIVING_ROOM_FURNITURE",
-    },
-
-    # Bedroom Furniture
-    {
-        "name": "Queen Bed Frame",
-        "description": "A sturdy queen-sized bed frame with a sleek design.",
-        "price": 599.99,
-        "category": "BEDROOM_FURNITURE",
-    },
-    {
-        "name": "Bedside Table",
-        "description": "A compact bedside table with a drawer for storage.",
-        "price": 149.99,
-        "category": "BEDROOM_FURNITURE",
-    },
-
-    # Dining Room Furniture
-    {
-        "name": "Dining Table Set",
-        "description": "A six-seater dining table set with comfortable chairs.",
-        "price": 799.99,
-        "category": "DINING_ROOM_FURNITURE",
-    },
-    {
-        "name": "Buffet Sideboard",
-        "description": "A spacious sideboard with multiple compartments.",
-        "price": 399.99,
-        "category": "DINING_ROOM_FURNITURE",
-    },
-
-    # Kitchen Furniture
-    {
-        "name": "Kitchen Island",
-        "description": "A mobile kitchen island with a butcher block top.",
-        "price": 299.99,
-        "category": "KITCHEN_FURNITURE",
-    },
-    {
-        "name": "Bar Stool Set",
-        "description": "A pair of high-quality bar stools with padded seats.",
-        "price": 199.99,
-        "category": "KITCHEN_FURNITURE",
-    },
-
-    # Office Furniture
-    {
-        "name": "Ergonomic Office Chair",
-        "description": "An adjustable office chair with lumbar support.",
-        "price": 249.99,
-        "category": "OFFICE_FURNITURE",
-    },
-    {
-        "name": "Standing Desk",
-        "description": "A height-adjustable standing desk with a sleek finish.",
-        "price": 399.99,
-        "category": "OFFICE_FURNITURE",
-    },
-
-    # Outdoor Furniture
-    {
-        "name": "Patio Table",
-        "description": "A durable outdoor table with weather-resistant materials.",
-        "price": 349.99,
-        "category": "OUTDOOR_FURNITURE",
-    },
-    {
-        "name": "Lounge Chair",
-        "description": "A reclining lounge chair perfect for outdoor relaxation.",
-        "price": 199.99,
-        "category": "OUTDOOR_FURNITURE",
-    },
-
-    # Children's Furniture
-    {
-        "name": "Kids Bunk Bed",
-        "description": "A sturdy and fun bunk bed for kids.",
-        "price": 499.99,
-        "category": "CHILDRENS_FURNITURE",
-    },
-    {
-        "name": "Toy Storage Cabinet",
-        "description": "A colorful cabinet with multiple compartments for toys.",
-        "price": 149.99,
-        "category": "CHILDRENS_FURNITURE",
-    },
-
-    # Storage Furniture
-    {
-        "name": "Bookshelf",
-        "description": "A tall bookshelf with adjustable shelves.",
-        "price": 199.99,
-        "category": "STORAGE_FURNITURE",
-    },
-    {
-        "name": "Storage Bench",
-        "description": "A multipurpose bench with a hidden storage compartment.",
-        "price": 249.99,
-        "category": "STORAGE_FURNITURE",
-    },
-
-    # Bathroom Furniture
-    {
-        "name": "Vanity Cabinet",
-        "description": "A modern bathroom vanity with ample storage space.",
-        "price": 299.99,
-        "category": "BATHROOM_FURNITURE",
-    },
-    {
-        "name": "Towel Rack",
-        "description": "A wall-mounted towel rack with a sleek design.",
-        "price": 49.99,
-        "category": "BATHROOM_FURNITURE",
-    },
-
-    # Accent Furniture
-    {
-        "name": "Side Table",
-        "description": "A small round side table with a glass top.",
-        "price": 89.99,
-        "category": "ACCENT_FURNITURE",
-    },
-    {
-        "name": "Accent Chair",
-        "description": "A stylish accent chair with a vibrant fabric design.",
-        "price": 249.99,
-        "category": "ACCENT_FURNITURE",
-    },
-]
-
+        # Living Room Furniture
+        {
+            "name": "Modern Sofa",
+            "description": "A comfortable modern sofa with plush cushions.",
+            "price": 899.99,
+            "category": "LIVING_ROOM_FURNITURE",
+        },
+        {
+            "name": "Wooden Coffee Table",
+            "description": "A stylish wooden coffee table with storage space.",
+            "price": 249.99,
+            "category": "LIVING_ROOM_FURNITURE",
+        },
+        # Bedroom Furniture
+        {
+            "name": "Queen Bed Frame",
+            "description": "A sturdy queen-sized bed frame with a sleek design.",
+            "price": 599.99,
+            "category": "BEDROOM_FURNITURE",
+        },
+        {
+            "name": "Bedside Table",
+            "description": "A compact bedside table with a drawer for storage.",
+            "price": 149.99,
+            "category": "BEDROOM_FURNITURE",
+        },
+        # Dining Room Furniture
+        {
+            "name": "Dining Table Set",
+            "description": "A six-seater dining table set with comfortable chairs.",
+            "price": 799.99,
+            "category": "DINING_ROOM_FURNITURE",
+        },
+        {
+            "name": "Buffet Sideboard",
+            "description": "A spacious sideboard with multiple compartments.",
+            "price": 399.99,
+            "category": "DINING_ROOM_FURNITURE",
+        },
+        # Kitchen Furniture
+        {
+            "name": "Kitchen Island",
+            "description": "A mobile kitchen island with a butcher block top.",
+            "price": 299.99,
+            "category": "KITCHEN_FURNITURE",
+        },
+        {
+            "name": "Bar Stool Set",
+            "description": "A pair of high-quality bar stools with padded seats.",
+            "price": 199.99,
+            "category": "KITCHEN_FURNITURE",
+        },
+        # Office Furniture
+        {
+            "name": "Ergonomic Office Chair",
+            "description": "An adjustable office chair with lumbar support.",
+            "price": 249.99,
+            "category": "OFFICE_FURNITURE",
+        },
+        {
+            "name": "Standing Desk",
+            "description": "A height-adjustable standing desk with a sleek finish.",
+            "price": 399.99,
+            "category": "OFFICE_FURNITURE",
+        },
+        # Outdoor Furniture
+        {
+            "name": "Patio Table",
+            "description": "A durable outdoor table with weather-resistant materials.",
+            "price": 349.99,
+            "category": "OUTDOOR_FURNITURE",
+        },
+        {
+            "name": "Lounge Chair",
+            "description": "A reclining lounge chair perfect for outdoor relaxation.",
+            "price": 199.99,
+            "category": "OUTDOOR_FURNITURE",
+        },
+        # Children's Furniture
+        {
+            "name": "Kids Bunk Bed",
+            "description": "A sturdy and fun bunk bed for kids.",
+            "price": 499.99,
+            "category": "CHILDRENS_FURNITURE",
+        },
+        {
+            "name": "Toy Storage Cabinet",
+            "description": "A colorful cabinet with multiple compartments for toys.",
+            "price": 149.99,
+            "category": "CHILDRENS_FURNITURE",
+        },
+        # Storage Furniture
+        {
+            "name": "Bookshelf",
+            "description": "A tall bookshelf with adjustable shelves.",
+            "price": 199.99,
+            "category": "STORAGE_FURNITURE",
+        },
+        {
+            "name": "Storage Bench",
+            "description": "A multipurpose bench with a hidden storage compartment.",
+            "price": 249.99,
+            "category": "STORAGE_FURNITURE",
+        },
+        # Bathroom Furniture
+        {
+            "name": "Vanity Cabinet",
+            "description": "A modern bathroom vanity with ample storage space.",
+            "price": 299.99,
+            "category": "BATHROOM_FURNITURE",
+        },
+        {
+            "name": "Towel Rack",
+            "description": "A wall-mounted towel rack with a sleek design.",
+            "price": 49.99,
+            "category": "BATHROOM_FURNITURE",
+        },
+        # Accent Furniture
+        {
+            "name": "Side Table",
+            "description": "A small round side table with a glass top.",
+            "price": 89.99,
+            "category": "ACCENT_FURNITURE",
+        },
+        {
+            "name": "Accent Chair",
+            "description": "A stylish accent chair with a vibrant fabric design.",
+            "price": 249.99,
+            "category": "ACCENT_FURNITURE",
+        },
+    ]
 
     for product in products:
         Product.objects.create(**product)
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('product', '0001_initial'),
+        ("product", "0001_initial"),
     ]
 
     operations = [
