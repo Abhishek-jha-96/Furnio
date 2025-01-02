@@ -1,13 +1,24 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { productFetch } from './api'; // Fetch function
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { productFetch } from './api';
 import { ProductResponse } from './contants';
 
-// Using the correct types for `useQuery`
-export const useProductQuery = (page = 1, page_size = 6) =>
-  useQuery<ProductResponse, Error>({
-    queryKey: ['list_product', page, page_size],
-    queryFn: () => productFetch(page, page_size), // Calling the API fetch function
-    placeholderData: keepPreviousData,
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 1, // Retry only once if the query fails
+export const useProductInfiniteQuery = () =>
+  useInfiniteQuery<ProductResponse>({
+    queryKey: ['list_product'],
+    queryFn: ({ pageParam }) => productFetch(pageParam as number),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.data.next) {
+        const nextPageUrl = new URL(lastPage.data.next);
+        return Number(nextPageUrl.searchParams.get('page'));
+      }
+      return undefined;
+    },
+    getPreviousPageParam: (firstPage) => {
+      if (firstPage.data.previous) {
+        const prevPageUrl = new URL(firstPage.data.previous);
+        return Number(prevPageUrl.searchParams.get('page'));
+      }
+      return undefined;
+    },
   });

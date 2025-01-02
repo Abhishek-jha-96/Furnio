@@ -1,25 +1,39 @@
 'use client';
-import { useProductQuery } from '@/api/product/queries';
+import { useProductInfiniteQuery } from '@/api/product/queries';
 import ProductCard from './ProductCard';
 import { useEffect } from 'react';
 import useproductStore from '@/store/productStore';
 
 export default function Products() {
-  const { data: productData, isLoading, isError } = useProductQuery();
+  const {
+    data: productData,
+    isLoading,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useProductInfiniteQuery();
+
   const { setProductData, products } = useproductStore();
 
   useEffect(() => {
     if (!isError && !isLoading && productData) {
-      try {
-        setProductData(productData.data.results || []);
-      } catch (error) {
-        console.error('Error setting product data:', error);
-      }
+      // Combine all pages' results
+      const allProducts = productData.pages.flatMap(
+        (page) => page.data.results,
+      );
+      setProductData(allProducts);
     }
   }, [productData, setProductData, isError, isLoading]);
 
   if (isLoading) return <p>Loading products...</p>;
   if (isError) return <p>Error loading products.</p>;
+
+  const handleShowMore = () => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -29,7 +43,7 @@ export default function Products() {
           {products.length > 0 ? (
             products.map((product, index) => (
               <ProductCard
-                key={index}
+                key={product.id} // Use product.id instead of index
                 imageUrl="/furniro_assets/bedroom1.png"
                 productName={product.name}
                 productCategory={product.category}
@@ -43,9 +57,15 @@ export default function Products() {
         </div>
       </div>
 
-      <button className="font-medium text-wood border-2 border-wood py-2 px-16">
-        Show more
-      </button>
+      {hasNextPage && (
+        <button
+          className="font-medium text-wood border-2 border-wood py-2 px-16"
+          onClick={handleShowMore}
+          disabled={isFetchingNextPage}
+        >
+          {isFetchingNextPage ? 'Loading more...' : 'Show more'}
+        </button>
+      )}
     </div>
   );
 }
