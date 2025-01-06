@@ -21,8 +21,8 @@ const useproductStore = create<ProductStore>()(
       version: 1, // (optional) by default, version is 0
       // (optional) whitelist specific keys to persist
       // partialize: (state) => ({ products: state.products }),
-    }
-  )
+    },
+  ),
 );
 
 export default useproductStore;

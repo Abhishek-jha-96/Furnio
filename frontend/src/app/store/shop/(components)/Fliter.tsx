@@ -1,11 +1,20 @@
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+'use client';
+import useproductStore from '@/store/productStore';
 import { LayoutGridIcon, LogsIcon, SlidersHorizontalIcon } from 'lucide-react';
+import { CustomDropDown } from './CustomDropDown';
+import {
+  FliterProps,
+  ShowDropDownProps,
+  SortDropDownProps,
+} from '../(constants)/constants';
 
-export default function Fliter() {
+export default function Fliter({ onSortChange }: FliterProps) {
+  const { products } = useproductStore();
+
+  const handleSortChange = (newSort: string) => {
+    onSortChange(newSort as 'Default' | 'Increasing' | 'Decreasing');
+  };
+
   return (
     <div className="flex justify-between items-center px-10 py-4 bg-[#F9F1E7]">
       <div className="flex">
@@ -18,28 +27,12 @@ export default function Fliter() {
           <LogsIcon />
         </section>
         <section className="pl-4">
-          <h3>Showing 1-16 of 80 results</h3>
+          <h3>Showing 1-{products.length} results</h3>
         </section>
       </div>
       <div className="flex gap-4">
-        <div className="flex gap-2">
-          <h1>Show</h1>
-          <Popover>
-            <div className="bg-white px-1">
-              <PopoverTrigger>1</PopoverTrigger>
-            </div>
-            <PopoverContent>Place content for the popover here.</PopoverContent>
-          </Popover>
-        </div>
-        <div className="flex gap-2">
-          <h1>Sort</h1>
-          <Popover>
-            <div className="bg-white px-1">
-              <PopoverTrigger>Default</PopoverTrigger>
-            </div>
-            <PopoverContent>Place content for the popover here.</PopoverContent>
-          </Popover>
-        </div>
+        <CustomDropDown {...ShowDropDownProps} />
+        <CustomDropDown {...SortDropDownProps} onChange={handleSortChange}/>
       </div>
     </div>
   );
