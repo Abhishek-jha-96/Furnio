@@ -1,4 +1,5 @@
 'use client';
+
 import {
   Card,
   CardContent,
@@ -6,18 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import useUserStore from '@/store/userStore';
 import { GitCompareArrows, Heart, Share2 } from 'lucide-react';
 import Image from 'next/legacy/image';
-import { useRouter } from 'next/navigation'; // Correct import for useRouter in app directory
-
-interface ProductCardProps {
-  imageUrl: string;
-  productName: string;
-  productCategory: string;
-  currentPrice: number;
-  originalPrice: number;
-}
+import { useRouter } from 'next/navigation';
+import useUserStore from '@/store/userStore';
+import { ProductCardProps } from '@/helpers/productConstants';
+import { IconWithLabel } from '@/helpers/productHelpers';
 
 export default function ProductCard({
   imageUrl,
@@ -25,15 +20,14 @@ export default function ProductCard({
   productCategory,
   currentPrice,
   originalPrice,
-}: ProductCardProps) {
-  const userData = useUserStore();
+}: ProductCardProps): JSX.Element {
+  const { name: userName } = useUserStore();
   const router = useRouter();
 
-  const handleAddToCart = () => {
-    if (!userData.name) {
+  const handleAddToCart = (): void => {
+    if (!userName) {
       router.push('/auth');
     } else {
-      // Add product to cart logic goes here
       console.log('Product added to cart');
     }
   };
@@ -49,18 +43,9 @@ export default function ProductCard({
             Add to cart
           </button>
           <div className="flex space-x-4 font-light text-sm">
-            <div className="flex flex-col items-center text-white">
-              <Share2 />
-              <h3>Share</h3>
-            </div>
-            <div className="flex flex-col items-center text-white">
-              <GitCompareArrows />
-              <h3>Compare</h3>
-            </div>
-            <div className="flex flex-col items-center text-white">
-              <Heart />
-              <h3>Like</h3>
-            </div>
+            <IconWithLabel Icon={Share2} label="Share" />
+            <IconWithLabel Icon={GitCompareArrows} label="Compare" />
+            <IconWithLabel Icon={Heart} label="Like" />
           </div>
         </div>
       </div>
@@ -74,7 +59,9 @@ export default function ProductCard({
             {productCategory}
           </CardTitle>
           <CardDescription>
-            <span className="text-lg font-medium">${currentPrice.toFixed(2)}</span>
+            <span className="text-lg font-medium">
+              ${currentPrice.toFixed(2)}
+            </span>
             <span className="line-through px-4 text-sm text-gray-400">
               ${originalPrice.toFixed(2)}
             </span>

@@ -1,10 +1,11 @@
 'use client';
+
+import { useEffect } from 'react';
 import { useProductInfiniteQuery } from '@/api/product/queries';
 import ProductCard from './ProductCard';
-import { useEffect } from 'react';
-import useproductStore from '@/store/productStore';
+import useProductStore from '@/store/productStore';
 
-export default function Products() {
+export default function Products(): JSX.Element {
   const {
     data: productData,
     isLoading,
@@ -14,14 +15,11 @@ export default function Products() {
     isFetchingNextPage,
   } = useProductInfiniteQuery();
 
-  const { setProductData, products } = useproductStore();
+  const { setProductData, products } = useProductStore();
 
   useEffect(() => {
     if (!isError && !isLoading && productData) {
-      // Combine all pages' results
-      const allProducts = productData.pages.flatMap(
-        (page) => page.data.results,
-      );
+      const allProducts = productData.pages.flatMap((page) => page.data.results);
       setProductData(allProducts);
     }
   }, [productData, setProductData, isError, isLoading]);
@@ -41,10 +39,11 @@ export default function Products() {
       <div className="w-full py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {products.length > 0 ? (
-            products.map((product, index) => (
+            products.map((product) => (
               <ProductCard
-                key={product.id} // Use product.id instead of index
-                imageUrl="/furniro_assets/bedroom1.png"
+                key={product.id}
+                // imageUrl={product.imageUrl || '/furniro_assets/placeholder.png'} uncomment this line when added imageUrl to product.
+                imageUrl='/furniro_assets/bedroom1.png'
                 productName={product.name}
                 productCategory={product.category}
                 currentPrice={product.price - product.price * 0.2}
