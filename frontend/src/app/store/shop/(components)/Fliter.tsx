@@ -32,7 +32,7 @@ export default function Fliter({ onSortChange }: FliterProps) {
       </div>
       <div className="flex gap-4">
         <CustomDropDown {...ShowDropDownProps} />
-        <CustomDropDown {...SortDropDownProps} onChange={handleSortChange}/>
+        <CustomDropDown {...SortDropDownProps} onChange={handleSortChange} />
       </div>
     </div>
   );

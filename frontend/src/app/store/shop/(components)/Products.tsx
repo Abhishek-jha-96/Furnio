@@ -28,7 +28,7 @@ export default function ProductSection({
         break;
     }
   };
-  
+
   useEffect(() => {
     sortProductData(sortFilter);
   }, [sortFilter, products]);
