@@ -5,12 +5,12 @@ from rest_framework.mixins import (
     RetrieveModelMixin,
     CreateModelMixin,
     UpdateModelMixin,
-    DestroyModelMixin
+    DestroyModelMixin,
 )
-from apps.core.pagination import ListPagination
 from apps.core.custom_exception_handlers import get_response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
+
 
 class BaseListModelMixin(ListModelMixin):
     def list(self, request, *args, **kwargs):
@@ -59,9 +59,11 @@ class BaseViewset(
     BaseRetrieveModelMixin,
     BaseUpdateModelMixin,
     BaseDestroyModelMixin,
-    GenericViewSet
+    GenericViewSet,
 ):
     filter_backends = (OrderingFilter,)
-    ordering_fields = ['id',]
+    ordering_fields = [
+        "id",
+    ]
     authentication_classes = (JWTAuthentication,)
     permission_classes = (IsAuthenticated,)

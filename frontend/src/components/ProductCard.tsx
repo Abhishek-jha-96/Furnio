@@ -1,3 +1,4 @@
+'use client';
 import {
   Card,
   CardContent,
@@ -5,8 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import useUserStore from '@/store/userStore';
 import { GitCompareArrows, Heart, Share2 } from 'lucide-react';
 import Image from 'next/legacy/image';
+import { useRouter } from 'next/navigation'; // Correct import for useRouter in app directory
 
 interface ProductCardProps {
   imageUrl: string;
@@ -23,11 +26,26 @@ export default function ProductCard({
   currentPrice,
   originalPrice,
 }: ProductCardProps) {
+  const userData = useUserStore();
+  const router = useRouter();
+
+  const handleAddToCart = () => {
+    if (!userData.name) {
+      router.push('/auth');
+    } else {
+      // Add product to cart logic goes here
+      console.log('Product added to cart');
+    }
+  };
+
   return (
     <div className="relative group w-48">
-      <div className="hidden group-hover:flex transition-opacity ease-in-out duration-300 absolute inset-0 bg-black/60 items-center justify-center z-10">
+      <div className="hidden w-[225px] group-hover:flex transition-opacity ease-in-out duration-300 absolute inset-0 bg-black/60 items-center justify-center z-10">
         <div className="flex flex-col items-center space-y-4">
-          <button className="bg-white text-black px-4 py-2 rounded">
+          <button
+            className="bg-white text-black px-4 py-2 rounded"
+            onClick={handleAddToCart}
+          >
             Add to cart
           </button>
           <div className="flex space-x-4">
@@ -46,13 +64,13 @@ export default function ProductCard({
           </div>
         </div>
       </div>
-      <Card className="rounded-none bg-gray-100/50">
+      <Card className="rounded-none bg-gray-100/50 w-[225px] h-[365px]">
         <CardHeader className="w-full p-0">
           <Image src={imageUrl} alt={productName} width={220} height={200} />
         </CardHeader>
-        <CardContent className="px-3 py-5">
+        <CardContent className="w-full px-3 py-5">
           <CardTitle className="text-xl pb-2">{productName}</CardTitle>
-          <CardTitle className="text-gray-500 text-sm pb-1">
+          <CardTitle className="w-[90%] text-gray-500 text-sm">
             {productCategory}
           </CardTitle>
           <CardDescription>

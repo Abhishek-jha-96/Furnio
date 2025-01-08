@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/legacy/image';
 
-import loginArt from '../../../public/vecteezyretro-interiorillustrativebackground2ep0822-rev2.png';
-import signUp_img from '../../../public/vecteezyretro-interiors-backgrounden0822_generated.jpg';
+import auth_bg_1 from '../../../public/auth_bg_1.jpg';
+import auth_bg_2 from '../../../public/auth_bg_2.jpg';
 
 export default function ImageSec({ isImageLeft }: { isImageLeft: boolean }) {
   return (
@@ -17,7 +17,7 @@ export default function ImageSec({ isImageLeft }: { isImageLeft: boolean }) {
           transition={{ duration: 0.5 }}
         >
           <Image
-            src={loginArt}
+            src={auth_bg_1}
             alt="login"
             layout="fill"
             objectFit="cover"
@@ -34,7 +34,7 @@ export default function ImageSec({ isImageLeft }: { isImageLeft: boolean }) {
           transition={{ duration: 0.5 }}
         >
           <Image
-            src={signUp_img}
+            src={auth_bg_2}
             alt="signup"
             layout="fill"
             objectFit="cover"

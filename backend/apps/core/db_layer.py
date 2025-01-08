@@ -1,6 +1,7 @@
 """
 Get & Filter Queries Start.
 """
+
 from typing import Optional
 
 from django.db.models import QuerySet
@@ -12,12 +13,12 @@ def db_get_single_record_by_filters(model, filters):
 
 
 def db_get_records_by_filters(
-        model,
-        q_filters: Q = None,
-        filters: any = None,
-        count: int = None,
-        order_by: str = 'id',
-        distinct: bool = False
+    model,
+    q_filters: Q = None,
+    filters: any = None,
+    count: int = None,
+    order_by: str = "id",
+    distinct: bool = False,
 ):
     if q_filters:
         query = model.objects.filter(q_filters)
@@ -30,12 +31,12 @@ def db_get_records_by_filters(
 
 
 def db_get_records_by_filters_with_foreign_keys_and_look_ups(
-        model: any,
-        q_filters: Q = None,
-        filters: dict = None,
-        foreign_keys: list = None,
-        look_ups: list = None,
-        distinct: bool = False
+    model: any,
+    q_filters: Q = None,
+    filters: dict = None,
+    foreign_keys: list = None,
+    look_ups: list = None,
+    distinct: bool = False,
 ):
     if filters is None:
         filters = dict()
@@ -54,10 +55,7 @@ def db_get_records_by_filters_with_foreign_keys_and_look_ups(
 
 
 def db_filter_query_set(
-        query_set,
-        filters: Optional = None,
-        q_filters: Q = None,
-        distinct: bool = False
+    query_set, filters: Optional = None, q_filters: Q = None, distinct: bool = False
 ):
     if filters:
         query_set = query_set.filter(**filters)
@@ -86,10 +84,8 @@ def db_create_record(model, data: dict):
     return model.objects.create(**data)
 
 
-def db_get_or_create_record(
-        model=None, **filter_and_create_data
-):
-    filter_and_create_data.setdefault('defaults', {})
+def db_get_or_create_record(model=None, **filter_and_create_data):
+    filter_and_create_data.setdefault("defaults", {})
 
     return model.objects.get_or_create(**filter_and_create_data)
 
@@ -99,11 +95,7 @@ def db_bulk_create_records(model, data_list: list):
     model.objects.bulk_create(record_list)
 
 
-def db_add_many_to_many_field_data(
-        instance,
-        field: str,
-        id_list: list
-):
+def db_add_many_to_many_field_data(instance, field: str, id_list: list):
     getattr(instance, field).add(*id_list)
     return instance
 
@@ -118,19 +110,16 @@ Update Queries Start.
 """
 
 
-def db_update_records_by_filters(
-        model: any,
-        filters: dict,
-        data: dict
-):
+def db_update_records_by_filters(model: any, filters: dict, data: dict):
     return model.objects.filter(**filters).update(**data)
 
 
 def db_update_instance(
-        instance, data: dict = None,
-        foreign_key_data: dict = None,
-        many_to_many_field: str = None,
-        id_list: list = None
+    instance,
+    data: dict = None,
+    foreign_key_data: dict = None,
+    many_to_many_field: str = None,
+    id_list: list = None,
 ) -> None:
     if data:
         instance.__dict__.update(**data)

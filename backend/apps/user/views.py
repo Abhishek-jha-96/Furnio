@@ -25,11 +25,10 @@ class UserViewsets(BaseViewset):
     """
     Viewset for User crud operations
     """
+
     serializer_class = UserSerializer
     authentication_classes = (JWTAuthentication,)
     permission_classes = (UserPermission,)
 
     def get_queryset(self):
         return db_get_records_by_filters(User, filters={"id": self.request.user.id})
-    
-

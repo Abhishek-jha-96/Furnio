@@ -1,6 +1,7 @@
 """
 Constants for custom_exception_handler start
 """
+
 THROTTLE_EXEC_DETAILS = "request limit exceeded available in %d seconds"
 NOT_FOUND_EXEC_DETAILS = "Item Not Found"
 VALIDATION_EXEC_DETAILS = "Validation Error"

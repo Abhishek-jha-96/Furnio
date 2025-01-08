@@ -24,7 +24,6 @@ class UserDetailsAdmin(UserAdmin):
                     "email",
                     "name",
                     "password",
-
                 )
             },
         ),
@@ -48,9 +47,7 @@ class UserDetailsAdmin(UserAdmin):
         "created_ts",
         "modified_ts",
     )
-    list_filter = ("is_superuser",
-
-                   )
+    list_filter = ("is_superuser",)
     search_fields = ("email", "name")
     ordering = ("email",)
 
