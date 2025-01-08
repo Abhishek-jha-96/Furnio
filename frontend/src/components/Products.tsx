@@ -38,8 +38,8 @@ export default function Products() {
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold">Our Products</h1>
-      <div className="container mx-auto py-7">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+      <div className="w-full py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {products.length > 0 ? (
             products.map((product, index) => (
               <ProductCard
