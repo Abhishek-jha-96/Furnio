@@ -19,7 +19,9 @@ export default function Products(): JSX.Element {
 
   useEffect(() => {
     if (!isError && !isLoading && productData) {
-      const allProducts = productData.pages.flatMap((page) => page.data.results);
+      const allProducts = productData.pages.flatMap(
+        (page) => page.data.results,
+      );
       setProductData(allProducts);
     }
   }, [productData, setProductData, isError, isLoading]);
@@ -43,7 +45,7 @@ export default function Products(): JSX.Element {
               <ProductCard
                 key={product.id}
                 // imageUrl={product.imageUrl || '/furniro_assets/placeholder.png'} uncomment this line when added imageUrl to product.
-                imageUrl='/furniro_assets/bedroom1.png'
+                imageUrl="/furniro_assets/bedroom1.png"
                 productName={product.name}
                 productCategory={product.category}
                 currentPrice={product.price - product.price * 0.2}
