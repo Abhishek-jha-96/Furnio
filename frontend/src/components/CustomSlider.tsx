@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
+import Image from 'next/image';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from '@/components/ui/carousel'
-import { ChevronRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import type { CarouselApi } from '@/components/ui/carousel'
-import bedroom_img from "../../public/furniro_assets/bedroom1.png"
-import living_img from "../../public/furniro_assets/Living1.png"
-import dining_img from "../../public/furniro_assets/dining1.png"
+} from '@/components/ui/carousel';
+import { ChevronRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import type { CarouselApi } from '@/components/ui/carousel';
+import bedroom_img from '../../public/furniro_assets/bedroom1.png';
+import living_img from '../../public/furniro_assets/Living1.png';
+import dining_img from '../../public/furniro_assets/dining1.png';
 
 const slides = [
   {
@@ -37,25 +37,25 @@ const slides = [
     subtitle: 'Culinary Haven',
     image: dining_img,
   },
-]
+];
 
 export default function CustomSlider() {
-  const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
-  const [next, setNext] = useState(1)
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [next, setNext] = useState(1);
 
   useEffect(() => {
-    if (!api) return
+    if (!api) return;
 
     api.on('select', () => {
-      setCurrent(api.selectedScrollSnap())
-      setNext((api.selectedScrollSnap() + 1) % slides.length)
-    })
-  }, [api])
+      setCurrent(api.selectedScrollSnap());
+      setNext((api.selectedScrollSnap() + 1) % slides.length);
+    });
+  }, [api]);
 
   const handleNext = () => {
-    api?.scrollNext()
-  }
+    api?.scrollNext();
+  };
 
   return (
     <div className="w-full">
@@ -110,10 +110,10 @@ export default function CustomSlider() {
               <button
                 key={index}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all",
-                  current === index 
-                    ? "bg-amber-600 scale-125" 
-                    : "bg-gray-300 hover:bg-gray-400"
+                  'w-2 h-2 rounded-full transition-all',
+                  current === index
+                    ? 'bg-amber-600 scale-125'
+                    : 'bg-gray-300 hover:bg-gray-400',
                 )}
                 onClick={() => api?.scrollTo(index)}
               />
@@ -121,7 +121,7 @@ export default function CustomSlider() {
           </div>
 
           {/* Navigation Button */}
-          <button 
+          <button
             className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center text-white hover:bg-amber-700 transition-colors"
             onClick={handleNext}
           >
@@ -130,5 +130,5 @@ export default function CustomSlider() {
         </div>
       </div>
     </div>
-  )
+  );
 }
