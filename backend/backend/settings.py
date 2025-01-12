@@ -1,6 +1,7 @@
 from os.path import join
 
 from apps.product.settings import PRODUCT_APP
+from apps.wishlist.settings import WISHLIST_APP
 from .configurations.common_settings import BASE_DIR
 from .configurations.env_helpers import (
     get_env_var,
@@ -44,6 +45,7 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     "apps.user",
     PRODUCT_APP,
+    WISHLIST_APP,
 ]
 
 INSTALLED_APPS = CORE_APPS + PROJECT_APPS + THIRD_PARTY_APPS
