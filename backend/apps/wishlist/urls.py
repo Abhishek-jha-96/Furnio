@@ -1,7 +1,11 @@
 from django.urls import path
 
 from rest_framework.routers import DefaultRouter
-from apps.wishlist.settings import WISHLIST_APP, WISHLIST_URL_BASENAME, WISHLIST_URL_PREFIX
+from apps.wishlist.settings import (
+    WISHLIST_APP,
+    WISHLIST_URL_BASENAME,
+    WISHLIST_URL_PREFIX,
+)
 from apps.wishlist.views import WishlistViewset
 
 
