@@ -20,11 +20,11 @@ export default function Fliter({ onSortChange }: FliterProps) {
       <div className="flex">
         <section className="flex px-2 gap-6 border-r-2 border-gray-500">
           <div className="flex gap-2">
-            <SlidersHorizontalIcon className="hover:bg-black/30 hover:rounded-md hover:p-1" />
+            <SlidersHorizontalIcon className="hover:bg-black/30 hover:rounded-md hover:p-1 transition-all delay-50 ease-in-out" />
             <h3 className="text-xl">Filter</h3>
           </div>
-          <LayoutGridIcon />
-          <LogsIcon />
+          <LayoutGridIcon className="hover:bg-black/30 hover:rounded-md hover:p-1 transition-all delay-50 ease-in-out" />
+          <LogsIcon className="hover:bg-black/30 hover:rounded-md hover:p-1 transition-all delay-50 ease-in-out" />
         </section>
         <section className="pl-4">
           <h3>Showing 1-{products.length} results</h3>
