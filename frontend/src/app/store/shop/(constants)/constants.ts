@@ -18,6 +18,7 @@ export const ShowDropDownProps = {
   },
 };
 
+
 // Define a union type for sortFilter
 export type SortFilter = 'Default' | 'Increasing' | 'Decreasing';
 
