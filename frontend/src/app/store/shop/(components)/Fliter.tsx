@@ -16,15 +16,15 @@ export default function Fliter({ onSortChange }: FliterProps) {
   };
 
   return (
-    <div className="flex justify-between items-center px-10 py-4 bg-[#F9F1E7]">
+    <div className="flex justify-between items-center px-24 py-4 bg-[#F9F1E7]">
       <div className="flex">
-        <section className="flex gap-8 pr-4 border-r-2 border-gray-500">
+        <section className="flex px-2 gap-6 border-r-2 border-gray-500">
           <div className="flex gap-2">
-            <SlidersHorizontalIcon />
+            <SlidersHorizontalIcon className="hover:bg-black/30 hover:rounded-md hover:p-1 transition-all delay-50 ease-in-out" />
             <h3 className="text-xl">Filter</h3>
           </div>
-          <LayoutGridIcon />
-          <LogsIcon />
+          <LayoutGridIcon className="hover:bg-black/30 hover:rounded-md hover:p-1 transition-all delay-50 ease-in-out" />
+          <LogsIcon className="hover:bg-black/30 hover:rounded-md hover:p-1 transition-all delay-50 ease-in-out" />
         </section>
         <section className="pl-4">
           <h3>Showing 1-{products.length} results</h3>
