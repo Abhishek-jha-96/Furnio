@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import { queryClient } from '@/context/QueryProvider';
-import { UserData, UserState } from '@/api/user/constants';
+import { UserData, UserState, WishlistItem } from '@/api/user/constants';
 
 const useUserStore = create<UserState>((set) => ({
   name: null,
   email: null,
   email_verified: null,
   is_active: null,
+  wishlist: [],
 
   // set user data in the state
   setUserData: (data: UserData) => {
@@ -29,6 +30,19 @@ const useUserStore = create<UserState>((set) => ({
 
     // clear cached queries if user logs out
     queryClient.clear(); // Clears React Query cache
+  },
+
+  // Add a product to the wishlist
+  addToWishlist: (wishlistData: WishlistItem) => {
+    set({
+      wishlist: [wishlistData],
+    });
+  },
+
+  removeFromWishlist: () => {
+    set({
+      wishlist: [],
+    });
   },
 }));
 

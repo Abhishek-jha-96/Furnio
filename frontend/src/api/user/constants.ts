@@ -18,6 +18,13 @@ export type UserResponse = {
   error_list: string[];
 };
 
+// Represents the structure of Wishlist data
+export interface WishlistItem {
+  id: number;
+  user_id: number;
+  product_id: number;
+}
+
 // Update Zustand state to match the structure expected
 export type UserState = {
   name: string | null;
@@ -26,4 +33,9 @@ export type UserState = {
   is_active: boolean | null;
   setUserData: (data: UserData) => void; // This should accept a single `UserData` object
   clearUserData: () => void;
+
+  // Add the WishlistItem type to the state
+  wishlist: WishlistItem[];
+  addToWishlist: (data: WishlistItem) => void;
+  removeFromWishlist: () => void;
 };

@@ -1,14 +1,15 @@
 'use client';
 
 import Image from 'next/legacy/image';
-import main_logo from '../../public/furniro_assets/Meubel House_Logos-05.png';
+import main_logo from '../../../public/furniro_assets/Meubel House_Logos-05.png';
 import { Heart, Search, ShoppingCartIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import useUserStore from '@/store/userStore';
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
 import { useUserQuery } from '@/api/user/queries';
 import CustomAvatart from '@/components/navbar/customAvatart';
+import { useWishlistInfiniteQuery } from '@/api/wishlist/queries';
 
 const MenuProps = [
   { name: 'Home', href: '/' },
@@ -20,6 +21,11 @@ const MenuProps = [
 export default function NavBar() {
   const { setUserData } = useUserStore();
   const { data: userData, isLoading, isError } = useUserQuery();
+  const {
+    data: wishlistData,
+    isLoading: isWishlistLoading,
+    isError: isWishlistError,
+  } = useWishlistInfiniteQuery();
 
   // Set user data to Zustand store after successful fetch
   useEffect(() => {
@@ -32,6 +38,10 @@ export default function NavBar() {
     }
   }, [userData, setUserData]);
 
+  useEffect(() => {
+    console.log(wishlistData);
+  }, [wishlistData]);
+
   return (
     <div className="w-full flex items-center justify-between py-4 px-2 md:px-16">
       {/* logo */}
@@ -42,12 +52,12 @@ export default function NavBar() {
       {/* menu */}
       <div className="hidden md:flex gap-4 gap-x-16 font-medium">
         {MenuProps.map((item) => (
-          <a href={item.href} className="relative group" key={item.name}>
+          <Link href={item.href} key={item.name} className="relative group">
             <span className="relative">
               {item.name}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#B88E2F] transition-all duration-300 group-hover:w-full"></span>
             </span>
-          </a>
+          </Link>
         ))}
       </div>
       {/* icons */}
@@ -67,7 +77,9 @@ export default function NavBar() {
           />
         )}
         <Search />
-        <Heart />
+        <Link href="/store/wishlist">
+          <Heart />
+        </Link>
         <Link href="/store/cart">
           <ShoppingCartIcon />
         </Link>
