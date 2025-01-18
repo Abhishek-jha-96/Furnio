@@ -8,5 +8,7 @@ from apps.core.pagination import ListPagination
 class WishlistViewset(BaseViewset):
     queryset = WishList.objects.all()
     serializer_class = WishlistSerializer
-    permission_classes = [CustomBasePermission, ]
+    permission_classes = [
+        CustomBasePermission,
+    ]
     pagination_class = ListPagination
