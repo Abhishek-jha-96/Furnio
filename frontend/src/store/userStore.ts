@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { queryClient } from '@/context/QueryProvider';
-import { UserData, UserState, WishlistItem } from '@/api/user/constants';
+import { UserData, UserState } from '@/api/user/constants';
+import { WishlistData } from '@/api/wishlist/constants';
 
 const useUserStore = create<UserState>((set) => ({
   name: null,
@@ -33,9 +34,9 @@ const useUserStore = create<UserState>((set) => ({
   },
 
   // Add a product to the wishlist
-  addToWishlist: (wishlistData: WishlistItem) => {
+  addToWishlist: (wishlistData: WishlistData[]) => {
     set({
-      wishlist: [wishlistData],
+      wishlist: wishlistData,
     });
   },
 

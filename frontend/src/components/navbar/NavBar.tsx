@@ -10,6 +10,7 @@ import { use, useEffect } from 'react';
 import { useUserQuery } from '@/api/user/queries';
 import CustomAvatart from '@/components/navbar/customAvatart';
 import { useWishlistInfiniteQuery } from '@/api/wishlist/queries';
+import { set } from 'react-hook-form';
 
 const MenuProps = [
   { name: 'Home', href: '/' },
@@ -19,7 +20,7 @@ const MenuProps = [
 ];
 
 export default function NavBar() {
-  const { setUserData } = useUserStore();
+  const { setUserData, addToWishlist } = useUserStore();
   const { data: userData, isLoading, isError } = useUserQuery();
   const {
     data: wishlistData,
@@ -39,8 +40,14 @@ export default function NavBar() {
   }, [userData, setUserData]);
 
   useEffect(() => {
-    console.log(wishlistData);
-  }, [wishlistData]);
+    if (wishlistData) {
+      try {
+        addToWishlist(wishlistData.pages[0].data.results);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [wishlistData, addToWishlist]);
 
   return (
     <div className="w-full flex items-center justify-between py-4 px-2 md:px-16">

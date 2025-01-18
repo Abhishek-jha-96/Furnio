@@ -1,3 +1,5 @@
+import { WishlistData } from "../wishlist/constants";
+
 // Represents the structure of a single user
 export type UserData = {
   id: number;
@@ -18,13 +20,6 @@ export type UserResponse = {
   error_list: string[];
 };
 
-// Represents the structure of Wishlist data
-export interface WishlistItem {
-  id: number;
-  user_id: number;
-  product_id: number;
-}
-
 // Update Zustand state to match the structure expected
 export type UserState = {
   name: string | null;
@@ -35,7 +30,7 @@ export type UserState = {
   clearUserData: () => void;
 
   // Add the WishlistItem type to the state
-  wishlist: WishlistItem[];
-  addToWishlist: (data: WishlistItem) => void;
+  wishlist: WishlistData[];
+  addToWishlist: (data: WishlistData[]) => void;
   removeFromWishlist: () => void;
 };
