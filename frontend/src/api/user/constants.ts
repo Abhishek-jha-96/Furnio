@@ -1,4 +1,4 @@
-import { WishlistData } from "../wishlist/constants";
+import { WishlistData } from '../wishlist/constants';
 
 // Represents the structure of a single user
 export type UserData = {

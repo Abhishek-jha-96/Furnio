@@ -61,7 +61,7 @@ class User(AbstractUser):
         verbose_name_plural = "User details"
 
     def __str__(self):
-        return str(self.first_name)
+        return str(self.name)
 
     def to_representation(self):
         rep = {
