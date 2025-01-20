@@ -14,7 +14,9 @@ export const productFetch = async (page: number): Promise<ProductResponse> => {
   return response.data;
 };
 
-export const productFetchById = async (id: number): Promise<ProductSingleResponse> => {
+export const productFetchById = async (
+  id: number,
+): Promise<ProductSingleResponse> => {
   const response = await axiosInstance.get<ProductSingleResponse>(
     `/api/v1/product/${id}`,
   );

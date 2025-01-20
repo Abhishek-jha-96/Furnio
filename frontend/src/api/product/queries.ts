@@ -23,9 +23,8 @@ export const useProductInfiniteQuery = () =>
     },
   });
 
-  export const useBatchProductQuery = (ids: number[]) =>
-    useQuery<ProductSingleResponse[]>({
-      queryKey: ['products', ids],
-      queryFn: () => Promise.all(ids.map((id) => productFetchById(id))),
-    });
-  
+export const useBatchProductQuery = (ids: number[]) =>
+  useQuery<ProductSingleResponse[]>({
+    queryKey: ['products', ids],
+    queryFn: () => Promise.all(ids.map((id) => productFetchById(id))),
+  });

@@ -26,8 +26,8 @@ export default function Wishlist() {
   if (error) return <p>Error loading wishlist.</p>;
 
   // Updated to match the actual API response structure
-  const products: ProductProps[] = productDetails
-    ?.map((response: ProductSingleResponse) => ({
+  const products: ProductProps[] =
+    productDetails?.map((response: ProductSingleResponse) => ({
       id: response.data.id,
       name: response.data.name,
       description: response.data.description,
