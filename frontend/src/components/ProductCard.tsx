@@ -12,7 +12,7 @@ import Image from 'next/legacy/image';
 import { useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
 import { ProductCardProps } from '@/helpers/productConstants';
-import { IconWithLabel } from '@/helpers/productHelpers';
+import { CustomLikeButton } from '@/helpers/productHelpers';
 
 export default function ProductCard({
   imageUrl,
@@ -43,9 +43,9 @@ export default function ProductCard({
             Add to cart
           </button>
           <div className="flex space-x-4 font-light text-sm">
-            <IconWithLabel Icon={Share2} label="Share" />
-            <IconWithLabel Icon={GitCompareArrows} label="Compare" />
-            <IconWithLabel Icon={Heart} label="Like" />
+            <CustomLikeButton label="Share" icon={Share2}/>
+            <CustomLikeButton icon={GitCompareArrows} label="Compare" />
+            <CustomLikeButton icon={Heart} label="Like" />
           </div>
         </div>
       </div>
