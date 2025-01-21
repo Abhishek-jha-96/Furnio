@@ -18,3 +18,8 @@ export interface WishlistResponse {
   message: string;
   error_list: [];
 }
+
+export interface wishListPostProps {
+  product: number | null;
+  user: number | null;
+}

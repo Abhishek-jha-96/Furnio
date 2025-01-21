@@ -4,6 +4,7 @@ import { UserData, UserState } from '@/api/user/constants';
 import { WishlistData } from '@/api/wishlist/constants';
 
 const useUserStore = create<UserState>((set) => ({
+  id: null,
   name: null,
   email: null,
   email_verified: null,
@@ -13,6 +14,7 @@ const useUserStore = create<UserState>((set) => ({
   // set user data in the state
   setUserData: (data: UserData) => {
     set({
+      id: data.id,
       name: data.name,
       email: data.email,
       email_verified: data.email_verified,
@@ -23,6 +25,7 @@ const useUserStore = create<UserState>((set) => ({
   // clear the user data (logout scenario, etc.)
   clearUserData: () => {
     set({
+      id: null,
       name: null,
       email: null,
       email_verified: null,

@@ -1,6 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority';
 
 export interface ProductCardProps {
+  productId: number;
   imageUrl: string;
   productName: string;
   productCategory: string;
@@ -14,7 +15,8 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: 'text-primary-foreground shadow hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+        destructive:
+          'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
       },
       size: {
         default: 'px-2 py-2',

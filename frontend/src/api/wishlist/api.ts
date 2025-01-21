@@ -1,5 +1,5 @@
 import axiosInstance from '@/lib/axios';
-import { WishlistResponse } from './constants';
+import { wishListPostProps, WishlistResponse } from './constants';
 
 export const wishlistFetch = async (
   page: number,
@@ -10,5 +10,10 @@ export const wishlistFetch = async (
       params: { page },
     },
   );
+  return response.data;
+};
+
+export const addToWishlist = async (data: wishListPostProps) : Promise<any> => {
+  const response = await axiosInstance.post<any>('/api/v1/wishlist/', data);
   return response.data;
 };

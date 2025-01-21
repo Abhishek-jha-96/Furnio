@@ -22,6 +22,7 @@ export type UserResponse = {
 
 // Update Zustand state to match the structure expected
 export type UserState = {
+  id: number | null;
   name: string | null;
   email: string | null;
   email_verified: boolean | null;
