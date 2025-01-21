@@ -13,7 +13,7 @@ export const wishlistFetch = async (
   return response.data;
 };
 
-export const addToWishlist = async (data: wishListPostProps) : Promise<any> => {
+export const addToWishlist = async (data: wishListPostProps): Promise<any> => {
   const response = await axiosInstance.post<any>('/api/v1/wishlist/', data);
   return response.data;
 };
