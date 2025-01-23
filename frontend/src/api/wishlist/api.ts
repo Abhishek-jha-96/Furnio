@@ -5,7 +5,7 @@ export const wishlistFetch = async (
   page: number,
 ): Promise<WishlistResponse> => {
   const response = await axiosInstance.get<WishlistResponse>(
-    '/api/v1/wishlist',
+    '/api/v1/wishlist/',
     {
       params: { page },
     },

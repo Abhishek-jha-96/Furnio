@@ -1,3 +1,4 @@
+import { variants } from '@/app/auth/constants';
 import { cva, VariantProps } from 'class-variance-authority';
 
 export interface ProductCardProps {
@@ -7,6 +8,7 @@ export interface ProductCardProps {
   productCategory: string;
   currentPrice: number;
   originalPrice: number;
+  variants?: 'default' | 'destructive';
 }
 
 export const buttonVariants = cva(

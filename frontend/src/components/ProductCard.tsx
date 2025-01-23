@@ -14,6 +14,7 @@ import useUserStore from '@/store/userStore';
 import { ProductCardProps } from '@/helpers/productConstants';
 import { CustomLikeButton } from '@/helpers/productHelpers';
 import { useAddToWishlistMutation } from '@/api/wishlist/mutations';
+import { AlertDestructive } from './login/Alert';
 
 export default function ProductCard({
   productId,
@@ -22,15 +23,16 @@ export default function ProductCard({
   productCategory,
   currentPrice,
   originalPrice,
+  variants,
 }: ProductCardProps): JSX.Element {
   const { name: userName, id: userId } = useUserStore();
   const router = useRouter();
   const wishlistMutation = useAddToWishlistMutation(
     () => {
-      // handle success
+      
     },
     () => {
-      // handle error
+
     },
   );
 
@@ -69,13 +71,13 @@ export default function ProductCard({
           </button>
           <div className="flex space-x-4 font-light text-sm">
             <span>
-              <CustomLikeButton label="Share" icon={Share2} />
+              <CustomLikeButton label="Share" icon={Share2}/>
             </span>
             <span>
               <CustomLikeButton icon={GitCompareArrows} label="Compare" />
             </span>
             <span onClick={handleAddLiked}>
-              <CustomLikeButton icon={Heart} label="Like" />
+              <CustomLikeButton icon={Heart} label="Like" variant={variants}/>
             </span>
           </div>
         </div>

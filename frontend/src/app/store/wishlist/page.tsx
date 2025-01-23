@@ -36,15 +36,17 @@ export default function Wishlist() {
     })) || [];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 py-8">
       {products.map((product) => (
         <ProductCard
           key={product.id}
+          productId={product.id}
           imageUrl="/furniro_assets/bedroom1.png"
           productName={product.name}
           productCategory={product.category}
           currentPrice={product.price - product.price * 0.2}
           originalPrice={product.price}
+          variants="destructive"
         />
       ))}
     </div>
