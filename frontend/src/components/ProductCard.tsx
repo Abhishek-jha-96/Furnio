@@ -28,12 +28,8 @@ export default function ProductCard({
   const { name: userName, id: userId } = useUserStore();
   const router = useRouter();
   const wishlistMutation = useAddToWishlistMutation(
-    () => {
-      
-    },
-    () => {
-
-    },
+    () => {},
+    () => {},
   );
 
   const checkUserAuth = (): boolean => {
@@ -71,13 +67,13 @@ export default function ProductCard({
           </button>
           <div className="flex space-x-4 font-light text-sm">
             <span>
-              <CustomLikeButton label="Share" icon={Share2}/>
+              <CustomLikeButton label="Share" icon={Share2} />
             </span>
             <span>
               <CustomLikeButton icon={GitCompareArrows} label="Compare" />
             </span>
             <span onClick={handleAddLiked}>
-              <CustomLikeButton icon={Heart} label="Like" variant={variants}/>
+              <CustomLikeButton icon={Heart} label="Like" variant={variants} />
             </span>
           </div>
         </div>
