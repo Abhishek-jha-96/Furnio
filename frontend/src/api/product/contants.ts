@@ -28,3 +28,9 @@ export interface ProductResponse {
   message: string | null;
   error_list: string[];
 }
+
+export interface ProductSingleResponse {
+  data: ProductResponseProps;
+  message: string | null;
+  error_list: string[];
+}

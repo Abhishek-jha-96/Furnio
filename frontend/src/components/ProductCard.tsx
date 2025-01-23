@@ -12,24 +12,47 @@ import Image from 'next/legacy/image';
 import { useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
 import { ProductCardProps } from '@/helpers/productConstants';
-import { IconWithLabel } from '@/helpers/productHelpers';
+import { CustomLikeButton } from '@/helpers/productHelpers';
+import { useAddToWishlistMutation } from '@/api/wishlist/mutations';
+import { AlertDestructive } from './login/Alert';
 
 export default function ProductCard({
+  productId,
   imageUrl,
   productName,
   productCategory,
   currentPrice,
   originalPrice,
+  variants,
 }: ProductCardProps): JSX.Element {
-  const { name: userName } = useUserStore();
+  const { name: userName, id: userId } = useUserStore();
   const router = useRouter();
+  const wishlistMutation = useAddToWishlistMutation(
+    () => {},
+    () => {},
+  );
 
-  const handleAddToCart = (): void => {
+  const checkUserAuth = (): boolean => {
     if (!userName) {
       router.push('/auth');
-    } else {
-      console.log('Product added to cart');
+      return false;
     }
+
+    return true;
+  };
+
+  const handleAddToCart = (): void => {
+    checkUserAuth();
+  };
+
+  const handleAddLiked = () => {
+    const res = checkUserAuth();
+    if (!res) return;
+
+    wishlistMutation.mutate({
+      user: userId,
+      product: productId,
+    });
   };
 
   return (
@@ -43,9 +66,15 @@ export default function ProductCard({
             Add to cart
           </button>
           <div className="flex space-x-4 font-light text-sm">
-            <IconWithLabel Icon={Share2} label="Share" />
-            <IconWithLabel Icon={GitCompareArrows} label="Compare" />
-            <IconWithLabel Icon={Heart} label="Like" />
+            <span>
+              <CustomLikeButton label="Share" icon={Share2} />
+            </span>
+            <span>
+              <CustomLikeButton icon={GitCompareArrows} label="Compare" />
+            </span>
+            <span onClick={handleAddLiked}>
+              <CustomLikeButton icon={Heart} label="Like" variant={variants} />
+            </span>
           </div>
         </div>
       </div>

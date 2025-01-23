@@ -46,6 +46,7 @@ export default function Products(): JSX.Element {
                 key={product.id}
                 // imageUrl={product.imageUrl || '/furniro_assets/placeholder.png'} uncomment this line when added imageUrl to product.
                 imageUrl="/furniro_assets/bedroom1.png"
+                productId={product.id}
                 productName={product.name}
                 productCategory={product.category}
                 currentPrice={product.price - product.price * 0.2}

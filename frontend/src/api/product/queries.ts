@@ -1,6 +1,6 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { productFetch } from './api';
-import { ProductResponse } from './contants';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { productFetch, productFetchById } from './api';
+import { ProductResponse, ProductSingleResponse } from './contants';
 
 export const useProductInfiniteQuery = () =>
   useInfiniteQuery<ProductResponse>({
@@ -21,4 +21,10 @@ export const useProductInfiniteQuery = () =>
       }
       return undefined;
     },
+  });
+
+export const useBatchProductQuery = (ids: number[]) =>
+  useQuery<ProductSingleResponse[]>({
+    queryKey: ['products', ids],
+    queryFn: () => Promise.all(ids.map((id) => productFetchById(id))),
   });

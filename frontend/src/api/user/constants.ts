@@ -1,3 +1,5 @@
+import { WishlistData } from '../wishlist/constants';
+
 // Represents the structure of a single user
 export type UserData = {
   id: number;
@@ -20,10 +22,16 @@ export type UserResponse = {
 
 // Update Zustand state to match the structure expected
 export type UserState = {
+  id: number | null;
   name: string | null;
   email: string | null;
   email_verified: boolean | null;
   is_active: boolean | null;
   setUserData: (data: UserData) => void; // This should accept a single `UserData` object
   clearUserData: () => void;
+
+  // Add the WishlistItem type to the state
+  wishlist: WishlistData[];
+  addToWishlist: (data: WishlistData[]) => void;
+  removeFromWishlist: () => void;
 };
