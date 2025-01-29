@@ -2,7 +2,7 @@
 Blog app settings start.
 """
 
-BLOG_APP_NAME = 'apps.blog'
+BLOG_APP_NAME = "apps.blog"
 
 BLOG_TITLE_MAX_LENGTH = 255
 
