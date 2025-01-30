@@ -5,6 +5,6 @@ from apps.blog.permission import BlogPermission
 
 
 class BlogViewset(BaseViewset):
-    permission_classes = BlogPermission
+    permission_classes = [BlogPermission, ]
     serializer_class = BlogSerializer
     queryset = Blog.objects.all()
