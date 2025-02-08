@@ -1,3 +1,4 @@
+from traceback import format_exc
 from rest_framework.serializers import ValidationError
 from django.http import Http404
 from rest_framework import status
@@ -84,6 +85,7 @@ class APIException(APIException):
 def custom_exception_handler(exc, context):
     print("➡ exc :", exc)
     print("➡ context :", context)
+    print("➡ traceback :", format_exc())
 
     # Initialize response flags
     not_found: bool = False

@@ -10,6 +10,7 @@ urlpatterns_v1 = [
     ),
     path("api/v1/", include("apps.product.urls")),
     path("api/v1/", include("apps.wishlist.urls")),
+    path("api/v1/", include("apps.blog.urls")),
 ]
 urlpatterns = [
     path("admin/", admin.site.urls),
