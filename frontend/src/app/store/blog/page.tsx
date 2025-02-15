@@ -1,3 +1,5 @@
+import BlogPageTemplate from "@/components/blog/BlogPageTemplate";
+
 export default function Blog() {
-  return <div>Blog</div>;
+  return <BlogPageTemplate />;
 }
