@@ -18,3 +18,8 @@ class BlogSerializer(ModelSerializer):
         read_only_fields = ("id", "created_ts", "modified_ts", "author")
 
     image = URLField(required=False, allow_blank=True)
+
+    def to_representation(self, obj):
+        rep = super().to_representation(obj)
+        rep["author"] = obj.author.name
+        return rep
