@@ -5,3 +5,9 @@ export interface IblogProps {
     title: string
     content: string;
 }
+
+export interface IrecentBlogProps {
+    image: string;
+    title: string;
+    modified_ts: string;
+}

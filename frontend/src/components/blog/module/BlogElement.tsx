@@ -14,6 +14,7 @@ export default function BlogImage({
     <div className="flex flex-col w-[800px]">
       <Image
         src="/furniro_assets/scandinavian-interior-mockup-wall-decal-background 1.png"
+        // src={image}
         alt="Scandinavian Interior Mockup"
         width={800} // Set appropriate width
         height={500} // Set appropriate height
