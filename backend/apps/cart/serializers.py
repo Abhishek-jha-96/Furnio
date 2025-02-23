@@ -5,9 +5,9 @@ from rest_framework.serializers import ModelSerializer
 
 
 class CartSerializer(ModelSerializer):
-    product_details = ProductSerializer(read_only=True)
-    user_details = UserSerializer(read_only=True)
+    product_details = ProductSerializer(read_only=True, source="product")
+    user_details = UserSerializer(read_only=True, source="user")
 
     class Meta:
         model = Cart
-        fields = "__all__"
+        fields = ["id", "product", "product_details", "user_details", "user"]

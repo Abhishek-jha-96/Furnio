@@ -15,7 +15,8 @@ from .configurations.logger_settings import LOGGING
 from .configurations.spectacular_settings import SPECTACULAR_SETTINGS
 from .configurations.rest_framework_settings import REST_FRAMEWORK
 from .configurations.jwt_settings import SIMPLE_JWT
-from .configurations.aws_settings import *
+# un-comment when got the aws credentials/envs
+# from .configurations.aws_settings import * 
 from .configurations.database_settings import (
     postgres_settings,
 )
@@ -106,6 +107,14 @@ DATABASES = {
 
 """ 
 Database Settings End.
+"""
+# Remove this and use aws_configurations instead.
+""" 
+Storage Settings Start.
+"""
+STATIC_URL = "static/"
+"""
+Storage Settings End.
 """
 
 """
