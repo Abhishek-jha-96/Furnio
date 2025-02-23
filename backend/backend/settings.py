@@ -3,6 +3,7 @@ from os.path import join
 from apps.product.settings import PRODUCT_APP
 from apps.wishlist.settings import WISHLIST_APP
 from apps.blog.settings import BLOG_APP_NAME
+from apps.cart.settings import CART_APP
 from .configurations.common_settings import BASE_DIR
 from .configurations.env_helpers import (
     get_env_var,
@@ -48,6 +49,7 @@ PROJECT_APPS = [
     PRODUCT_APP,
     WISHLIST_APP,
     BLOG_APP_NAME,
+    CART_APP,
 ]
 
 INSTALLED_APPS = CORE_APPS + PROJECT_APPS + THIRD_PARTY_APPS
