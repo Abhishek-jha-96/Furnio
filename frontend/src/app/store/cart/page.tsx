@@ -1,8 +1,12 @@
+'use client'
 import { Button } from '@/components/ui/button';
 import Row from './(components)/Row';
 import Link from 'next/link';
+import { useCartQuery } from '@/api/cart/queries';
 
 export default function Cart() {
+  const { data: CartData, isError, isLoading } = useCartQuery();
+  console.log(CartData?.data);
   return (
     <div className="w-full flex justify-center items-center py-20">
       <div className="flex gap-8">
