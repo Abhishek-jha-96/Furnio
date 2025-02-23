@@ -16,7 +16,6 @@ const MenuProps = [
   { name: 'Home', href: '/' },
   { name: 'Shop', href: '/store/shop' },
   { name: 'Blog', href: '/store/blog' },
-  { name: 'Contact', href: '/store/contact' },
 ];
 
 export default function NavBar() {
@@ -83,13 +82,19 @@ export default function NavBar() {
             secondLetter={userData.data[0].name[1]}
           />
         )}
-        <Search />
-        <Link href="/store/wishlist">
-          <Heart />
-        </Link>
-        <Link href="/store/cart">
-          <ShoppingCartIcon />
-        </Link>
+        <div className='hover:bg-wood/20 p-2 rounded-3xl transition-all ease-in-out delay-100 hover:cursor-pointer'>
+          <Search />
+        </div>
+        <div className='hover:bg-wood/20 p-2 rounded-3xl transition-all ease-in-out delay-100'>
+          <Link href="/store/wishlist">
+            <Heart />
+          </Link>
+        </div>
+        <div className='hover:bg-wood/20 p-2 rounded-3xl transition-all ease-in-out delay-100'>
+          <Link href="/store/cart">
+            <ShoppingCartIcon />
+          </Link>
+        </div>
       </div>
     </div>
   );
