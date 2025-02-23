@@ -11,7 +11,7 @@ export interface ICartData {
 
 
 export interface ICartResponse {
-    data: ICartData[] | null;
+    data: ICartData[];
     message: string | null;
     error_list: string[];
 }

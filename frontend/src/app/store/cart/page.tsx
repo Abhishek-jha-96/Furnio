@@ -1,12 +1,20 @@
-'use client'
+'use client';
 import { Button } from '@/components/ui/button';
 import Row from './(components)/Row';
 import Link from 'next/link';
 import { useCartQuery } from '@/api/cart/queries';
+import { useEffect, useState } from 'react';
+import { ICartData } from '@/api/cart/contants';
 
 export default function Cart() {
   const { data: CartData, isError, isLoading } = useCartQuery();
-  console.log(CartData?.data);
+  const [cartData, setCartData] = useState<ICartData[]>();
+  useEffect(() => {
+    if (!isError && !isLoading) {
+      setCartData(CartData?.data);
+    }
+  }, [isError, isLoading, setCartData, CartData]);
+
   return (
     <div className="w-full flex justify-center items-center py-20">
       <div className="flex gap-8">
@@ -20,12 +28,16 @@ export default function Cart() {
             />
           </div>
           <div className="flex px-4 py-1">
-            <Row
-              Product="Product"
-              Price="Price"
-              Quantity="Quantity"
-              Subtotal="Subtotal"
-            />
+            {cartData?.map((data, index) => (
+              <div key={index}>
+                <Row
+                  Product={data.product_details.name}
+                  Price={String(data.product_details.price)}
+                  Quantity="Quantity"
+                  Subtotal={String(data.product_details.price)}
+                />
+              </div>
+            ))}
           </div>
         </section>
         <section className="flex flex-col gap-4 items-center bg-[#F9F1E7] px-16 py-10">
