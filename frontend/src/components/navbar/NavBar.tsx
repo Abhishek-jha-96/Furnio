@@ -56,12 +56,12 @@ export default function NavBar() {
         <h1 className="font-mono font-bold text-3xl">Furniro</h1>
       </div>
       {/* menu */}
-      <div className="hidden md:flex gap-4 gap-x-16 font-medium">
+      <div className="hidden md:flex gap-6 gap-x-16 font-medium">
         {MenuProps.map((item) => (
           <Link href={item.href} key={item.name} className="relative group">
             <span className="relative">
               {item.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#B88E2F] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#B88E2F] transition-all duration-300 group-hover:w-full py-0.5"></span>
             </span>
           </Link>
         ))}
