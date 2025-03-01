@@ -9,3 +9,4 @@ export const useCartQuery = () =>
     staleTime: 1000 * 60 * 5, // 5 minutes
     retry: 1, // Retry only once if the query fails
   });
+

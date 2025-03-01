@@ -44,6 +44,7 @@ export default function ProductSection({
           products.map((product) => (
             <ProductCard
               key={product.id}
+              productId={product.id}
               imageUrl="/furniro_assets/bedroom1.png"
               productName={product.name}
               productCategory={product.category}

@@ -9,6 +9,10 @@ export interface ICartData {
     user_details: UserData;
 }
 
+export interface ICartPostData {
+    product: number;
+    user: number;
+}
 
 export interface ICartResponse {
     data: ICartData[];
