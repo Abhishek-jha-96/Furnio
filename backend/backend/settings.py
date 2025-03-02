@@ -3,6 +3,7 @@ from os.path import join
 from apps.product.settings import PRODUCT_APP
 from apps.wishlist.settings import WISHLIST_APP
 from apps.blog.settings import BLOG_APP_NAME
+from apps.cart.settings import CART_APP
 from .configurations.common_settings import BASE_DIR
 from .configurations.env_helpers import (
     get_env_var,
@@ -14,7 +15,8 @@ from .configurations.logger_settings import LOGGING
 from .configurations.spectacular_settings import SPECTACULAR_SETTINGS
 from .configurations.rest_framework_settings import REST_FRAMEWORK
 from .configurations.jwt_settings import SIMPLE_JWT
-from .configurations.aws_settings import *
+# un-comment when got the aws credentials/envs
+# from .configurations.aws_settings import * 
 from .configurations.database_settings import (
     postgres_settings,
 )
@@ -48,6 +50,7 @@ PROJECT_APPS = [
     PRODUCT_APP,
     WISHLIST_APP,
     BLOG_APP_NAME,
+    CART_APP,
 ]
 
 INSTALLED_APPS = CORE_APPS + PROJECT_APPS + THIRD_PARTY_APPS
@@ -104,6 +107,14 @@ DATABASES = {
 
 """ 
 Database Settings End.
+"""
+# Remove this and use aws_configurations instead.
+""" 
+Storage Settings Start.
+"""
+STATIC_URL = "static/"
+"""
+Storage Settings End.
 """
 
 """

@@ -15,6 +15,7 @@ import { ProductCardProps } from '@/helpers/productConstants';
 import { CustomLikeButton } from '@/helpers/productHelpers';
 import { useAddToWishlistMutation } from '@/api/wishlist/mutations';
 import { AlertDestructive } from './login/Alert';
+import { useAddToCartMutation } from '@/api/cart/mutations';
 
 export default function ProductCard({
   productId,
@@ -31,6 +32,10 @@ export default function ProductCard({
     () => {},
     () => {},
   );
+  const cartMutation = useAddToCartMutation(
+    () => {},
+    () => {},
+  );
 
   const checkUserAuth = (): boolean => {
     if (!userName) {
@@ -42,12 +47,17 @@ export default function ProductCard({
   };
 
   const handleAddToCart = (): void => {
-    checkUserAuth();
+    if (!checkUserAuth() || userId === null) return;
+
+    cartMutation.mutate({
+      user: userId,
+      product: productId,
+      quantity: 1,
+    })
   };
 
   const handleAddLiked = () => {
-    const res = checkUserAuth();
-    if (!res) return;
+    if (!checkUserAuth() || userId === null) return;
 
     wishlistMutation.mutate({
       user: userId,

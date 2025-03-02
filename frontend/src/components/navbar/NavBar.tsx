@@ -16,7 +16,6 @@ const MenuProps = [
   { name: 'Home', href: '/' },
   { name: 'Shop', href: '/store/shop' },
   { name: 'Blog', href: '/store/blog' },
-  { name: 'Contact', href: '/store/contact' },
 ];
 
 export default function NavBar() {
@@ -57,12 +56,12 @@ export default function NavBar() {
         <h1 className="font-mono font-bold text-3xl">Furniro</h1>
       </div>
       {/* menu */}
-      <div className="hidden md:flex gap-4 gap-x-16 font-medium">
+      <div className="hidden md:flex gap-6 gap-x-16 font-medium">
         {MenuProps.map((item) => (
           <Link href={item.href} key={item.name} className="relative group">
             <span className="relative">
               {item.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#B88E2F] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#B88E2F] transition-all duration-300 group-hover:w-full py-0.5"></span>
             </span>
           </Link>
         ))}
@@ -83,13 +82,19 @@ export default function NavBar() {
             secondLetter={userData.data[0].name[1]}
           />
         )}
-        <Search />
-        <Link href="/store/wishlist">
-          <Heart />
-        </Link>
-        <Link href="/store/cart">
-          <ShoppingCartIcon />
-        </Link>
+        <div className='hover:bg-wood/20 p-2 rounded-3xl transition-all ease-in-out delay-100 hover:cursor-pointer'>
+          <Search />
+        </div>
+        <div className='hover:bg-wood/20 p-2 rounded-3xl transition-all ease-in-out delay-100'>
+          <Link href="/store/wishlist">
+            <Heart />
+          </Link>
+        </div>
+        <div className='hover:bg-wood/20 p-2 rounded-3xl transition-all ease-in-out delay-100'>
+          <Link href="/store/cart">
+            <ShoppingCartIcon />
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 from apps.core.views import BaseListModelMixin, BaseViewset
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.viewsets import GenericViewSet
 from apps.product.models import Product
@@ -16,5 +16,6 @@ class ProductViewset(BaseViewset):
 
 class ProductListViewset(GenericViewSet, BaseListModelMixin):
     serializer_class = ProductSerializer
+    permission_classes = [AllowAny]
     pagination_class = ListPagination
     queryset = Product.objects.all()
