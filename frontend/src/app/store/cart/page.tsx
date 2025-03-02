@@ -41,7 +41,7 @@ export default function Cart() {
           <div className="flex bg-[#F9F1E7] py-1 px-4">
             <Row Product="Product" Price="Price" Quantity="Quantity" />
           </div>
-          <div className="flex px-4 py-1">
+          <div className="flex flex-col px-4 py-1">
             {cartData?.map((data, index) => (
               <div key={index}>
                 <Row

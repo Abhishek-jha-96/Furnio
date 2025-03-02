@@ -19,7 +19,7 @@ export const getSubTotal = (data: ICartData[]) => {
     sub_total += (element.product_details.price * element.product_details.price);
   });
 
-  return Math.fround(sub_total);
+  return (sub_total).toFixed(2);
 }
 
 export const getTotal = (data: ICartData[]) => {
@@ -30,5 +30,5 @@ export const getTotal = (data: ICartData[]) => {
 
   let discount = total / 10; 
 
-  return Math.fround(total - discount);
+  return (total - discount).toFixed(2);
 }
