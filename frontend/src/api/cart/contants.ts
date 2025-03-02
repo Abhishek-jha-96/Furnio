@@ -7,11 +7,13 @@ export interface ICartData {
     product: number;
     user: number;
     user_details: UserData;
+    quantity: number;
 }
 
 export interface ICartPostData {
     product: number;
     user: number;
+    quantity: number;
 }
 
 export interface ICartResponse {

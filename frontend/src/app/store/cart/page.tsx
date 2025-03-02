@@ -47,7 +47,7 @@ export default function Cart() {
                 <Row
                   Product={data.product_details.name}
                   Price={String(data.product_details.price)}
-                  Quantity={1}
+                  Quantity={data.quantity}
                 />
               </div>
             ))}

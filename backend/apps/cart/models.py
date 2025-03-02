@@ -9,6 +9,7 @@ class Cart(models.Model):
     product = models.ForeignKey(
         Product, related_name="users_product", on_delete=models.CASCADE
     )
+    quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return self.user.name + " " + self.product.name

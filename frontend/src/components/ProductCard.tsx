@@ -52,6 +52,7 @@ export default function ProductCard({
     cartMutation.mutate({
       user: userId,
       product: productId,
+      quantity: 1,
     })
   };
 
