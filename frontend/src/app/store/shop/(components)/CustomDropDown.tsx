@@ -24,7 +24,9 @@ export function CustomDropDown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">{heading}</Button>
+        <Button className='text-lg px-8 py-3 bg-wood text-white hover:text-black' variant="outline">
+          <span>{heading}</span>
+          </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuRadioGroup
