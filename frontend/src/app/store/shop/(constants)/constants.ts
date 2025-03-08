@@ -9,15 +9,6 @@ export interface CustomDropDownProps {
   options: dropDownList;
 }
 
-export const ShowDropDownProps = {
-  heading: 'Show',
-  options: {
-    option1: '10',
-    option2: '20',
-    option3: '30',
-  },
-};
-
 // Define a union type for sortFilter
 export type SortFilter = 'Default' | 'Increasing' | 'Decreasing';
 

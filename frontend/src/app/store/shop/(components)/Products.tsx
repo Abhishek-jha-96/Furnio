@@ -15,23 +15,21 @@ export default function ProductSection({
   const hydrated = useHydration();
   const { setProductData, products } = useproductStore();
 
-  const sortProductData = (sortFilter: SortFilter) => {
-    switch (sortFilter) {
-      case 'Default':
-        console.log('Default');
-        break;
-      case 'Increasing':
-        console.log('Increasing');
-        break;
-      case 'Decreasing':
-        console.log('Decreasing');
-        break;
-    }
-  };
-
   useEffect(() => {
+    const sortProductData = (sortFilter: SortFilter) => {
+      switch (sortFilter) {
+        case 'Default':
+          break;
+        case 'Increasing':
+           setProductData(products.sort((a, b) => a.id - b.id));
+          break;
+        case 'Decreasing':
+          setProductData(products.sort((a, b) => b.id - a.id));
+          break;
+      }
+    };
     sortProductData(sortFilter);
-  }, [sortFilter, products]);
+  }, [sortFilter, products, setProductData]);
 
   if (!hydrated) {
     return <div>Loading...</div>;

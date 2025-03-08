@@ -1,5 +1,5 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import { productFetch, productFetchById } from './api';
+import { useInfiniteQuery, usePrefetchInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { productFetch, productFetchById, productFilterPrefetch } from './api';
 import { ProductResponse, ProductSingleResponse } from './contants';
 
 export const useProductInfiniteQuery = () =>
@@ -28,3 +28,19 @@ export const useBatchProductQuery = (ids: number[]) =>
     queryKey: ['products', ids],
     queryFn: () => Promise.all(ids.map((id) => productFetchById(id))),
   });
+
+
+export const useProductPrefetchQuery = (price: string) => 
+  usePrefetchInfiniteQuery<ProductResponse>({
+    queryKey: ['products', price],
+    queryFn: () => productFilterPrefetch(price),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.data.next) {
+        const nextPageUrl = new URL(lastPage.data.next);
+        return Number(nextPageUrl.searchParams.get('page'));
+      }
+      return undefined;
+    },
+    pages: 3
+  })
