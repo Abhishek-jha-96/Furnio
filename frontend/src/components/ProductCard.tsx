@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { GitCompareArrows, Heart, Share2 } from 'lucide-react';
+import { Heart, Share2 } from 'lucide-react';
 import Image from 'next/legacy/image';
 import { useRouter } from 'next/navigation';
 import useUserStore from '@/store/userStore';
@@ -78,9 +78,6 @@ export default function ProductCard({
           <div className="flex space-x-4 font-light text-sm">
             <span>
               <CustomLikeButton label="Share" icon={Share2} />
-            </span>
-            <span>
-              <CustomLikeButton icon={GitCompareArrows} label="Compare" />
             </span>
             <span onClick={handleAddLiked}>
               <CustomLikeButton icon={Heart} label="Like" variant={variants} />

@@ -22,3 +22,13 @@ export const productFetchById = async (
   );
   return response.data;
 };
+
+export const productFilterPrefetch = async (price: number): Promise<ProductResponse> => {
+  const response = await axiosInstance.get<ProductResponse>(
+    '/api/v1/product',
+    {
+      params: { price },
+    }
+  );
+  return response.data;
+}
