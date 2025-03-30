@@ -15,21 +15,21 @@ import { useProductPrefetchQuery } from '@/api/product/queries';
 
 export default function Fliter({ onSortChange }: FliterProps) {
 
-  const [selectedOption, setSelectedOption] = useState<string>('price');
+  const [selectedOption, setSelectedOption] = useState<number>(99999);
   const { products, setProductData } = useproductStore();
 
   const prefetchProducts = useProductPrefetchQuery(selectedOption);
 
-  useEffect(() => {
-    prefetchProducts(); // Trigger prefetching whenever the filter changes
-  }, [selectedOption, prefetchProducts]);
+  // useEffect(() => {
+  //   prefetchProducts(); // Trigger prefetching whenever the filter changes
+  // }, [selectedOption, prefetchProducts]);
 
   const handleSortChange = (newSort: string) => {
     onSortChange(newSort as 'Default' | 'Increasing' | 'Decreasing');
   };
 
   const handleChange = (value: string) => {
-    setSelectedOption(value);
+    setSelectedOption(Number(value));
   };
 
   return (
@@ -43,13 +43,15 @@ export default function Fliter({ onSortChange }: FliterProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuRadioGroup
-                value={selectedOption}
+                value={String(selectedOption)}
                 onValueChange={handleChange} // Corrected event handler
               >
                 <DropdownMenuRadioItem value="price">
                   Price
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="1000">Under 1000</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="1000">Under 5000</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="1000">Under 10000</DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -30,7 +30,7 @@ export const useBatchProductQuery = (ids: number[]) =>
   });
 
 
-export const useProductPrefetchQuery = (price: string) => 
+export const useProductPrefetchQuery = (price: number) => 
   usePrefetchInfiniteQuery<ProductResponse>({
     queryKey: ['products', price],
     queryFn: () => productFilterPrefetch(price),
